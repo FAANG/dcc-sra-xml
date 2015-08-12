@@ -16,36 +16,39 @@ with 'Bio::SRAXml::Roles::Identifier', 'Bio::SRAXml::Roles::NameGroup',
   'Bio::SRAXml::Roles::ToXML';
 
 use Moose::Util::TypeConstraints;
-subtype 'Bio::SRAXml::ArrayRefOfEntityRef' => as 'ArrayRef[Bio::SRAXml::EntityRef]';
-subtype 'Bio::SRAXml::ArrayRefOfFile'      => as 'ArrayRef[Bio::SRAXml::File]';
-subtype 'Bio::SRAXml::ArrayRefOfAttr'      => as 'ArrayRef[Bio::SRAXml::Attribute]';
-subtype 'Bio::SRAXml::ArrayRefOfLink'      => as 'ArrayRef[Bio::SRAXml::Roles::Link]';
+subtype 'Bio::SRAXml::Analysis::ArrayRefOfEntityRef' => as 'ArrayRef[Bio::SRAXml::EntityRef]';
+subtype 'Bio::SRAXml::Analysis::ArrayRefOfFile'      => as 'ArrayRef[Bio::SRAXml::File]';
+subtype 'Bio::SRAXml::Analysis::ArrayRefOfAttr'      => as 'ArrayRef[Bio::SRAXml::Attribute]';
+subtype 'Bio::SRAXml::Analysis::ArrayRefOfLink'      => as 'ArrayRef[Bio::SRAXml::Roles::Link]';
+
+coerce 'Bio::SRAXml::Analysis' => from 'HashRef' =>
+  via { Bio::SRAXml::Analysis->new( %{$_} ) };
+
 
 #entity ref coercions
-coerce 'Bio::SRAXml::EntityRef' => from 'HashRef' =>
-  via { Bio::SRAXml::EntityRef->new( %{$_} ) };
-coerce 'Bio::SRAXml::ArrayRefOfEntityRef' => from 'ArrayRef[HashRef]' => via {
+
+coerce 'Bio::SRAXml::Analysis::ArrayRefOfEntityRef' => from 'ArrayRef[HashRef]' => via {
     [ map { Bio::SRAXml::EntityRef->new( %{$_} ) } @$_ ];
 };
-coerce 'Bio::SRAXml::ArrayRefOfEntityRef' => from 'HashRef' =>
+coerce 'Bio::SRAXml::Analysis::ArrayRefOfEntityRef' => from 'HashRef' =>
   via { [ Bio::SRAXml::EntityRef->new( %{$_} ) ] };
-coerce 'Bio::SRAXml::ArrayRefOfEntityRef' => from 'Bio::SRAXml::EntityRef' => via { [$_] };
+coerce 'Bio::SRAXml::Analysis::ArrayRefOfEntityRef' => from 'Bio::SRAXml::EntityRef' => via { [$_] };
 
 #file coercions
 coerce 'Bio::SRAXml::File' => from 'HashRef' =>
   via { Bio::SRAXml::File->new( %{$_} ) };
-coerce 'Bio::SRAXml::ArrayRefOfFile' => from 'ArrayRef[HashRef]' => via {
+coerce 'Bio::SRAXml::Analysis::ArrayRefOfFile' => from 'ArrayRef[HashRef]' => via {
     [ map { Bio::SRAXml::File->new( %{$_} ) } @$_ ];
 };
-coerce 'Bio::SRAXml::ArrayRefOfFile' => from 'HashRef' =>
+coerce 'Bio::SRAXml::Analysis::ArrayRefOfFile' => from 'HashRef' =>
   via { [ Bio::SRAXml::File->new( %{$_} ) ] };
-coerce 'Bio::SRAXml::ArrayRefOfFile' => from 'Bio::SRAXml::File' => via { [$_] };
+coerce 'Bio::SRAXml::Analysis::ArrayRefOfFile' => from 'Bio::SRAXml::File' => via { [$_] };
 
 #attribute coercions
 coerce 'Bio::SRAXml::Attribute' => from 'HashRef' =>
   via { Bio::SRAXml::Attribute->new( %{$_} ) };
 
-coerce 'Bio::SRAXml::ArrayRefOfAttr' => from 'ArrayRef[HashRef]' => via {
+coerce 'Bio::SRAXml::Analysis::ArrayRefOfAttr' => from 'ArrayRef[HashRef]' => via {
     [ map { Bio::SRAXml::Attribute->new( %{$_} ) } @$_ ];
 };
 
@@ -61,8 +64,8 @@ sub _attr_args {
 
 }
 
-coerce 'Bio::SRAXml::ArrayRefOfAttr' => from 'Bio::SRAXml::Attribute' => via { [$_] };
-coerce 'Bio::SRAXml::ArrayRefOfAttr' => from 'HashRef' => via {
+coerce 'Bio::SRAXml::Analysis::ArrayRefOfAttr' => from 'Bio::SRAXml::Attribute' => via { [$_] };
+coerce 'Bio::SRAXml::Analysis::ArrayRefOfAttr' => from 'HashRef' => via {
     my $hr = $_;
     [
         map { Bio::SRAXml::Attribute->new( _attr_args( $_, $hr->{$_} ) ) }
@@ -85,11 +88,11 @@ sub _link_from_hashref {
 
 coerce 'Bio::SRAXml::Roles::Link' => from 'HashRef' =>
   via { _link_from_hashref($_) };
-coerce 'Bio::SRAXml::ArrayRefOfLink' => from 'ArrayRef[HashRef]' => via {
+coerce 'Bio::SRAXml::Analysis::ArrayRefOfLink' => from 'ArrayRef[HashRef]' => via {
     [ map { _link_from_hashref($_) } @$_ ];
 };
-coerce 'Bio::SRAXml::ArrayRefOfLink' => from 'HashRef' => via { [ _link_from_hashref($_) ] };
-coerce 'Bio::SRAXml::ArrayRefOfLink' => from 'Bio::SRAXml::Roles::Link' => via { [$_] };
+coerce 'Bio::SRAXml::Analysis::ArrayRefOfLink' => from 'HashRef' => via { [ _link_from_hashref($_) ] };
+coerce 'Bio::SRAXml::Analysis::ArrayRefOfLink' => from 'Bio::SRAXml::Roles::Link' => via { [$_] };
 
 #analysis type coercion
 
@@ -108,7 +111,7 @@ has 'analysis_type'   => ( is => 'rw', isa => 'Bio::SRAXml::Roles::AnalysisType'
 has 'study_refs' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::ArrayRefOfEntityRef',
+    isa     => 'Bio::SRAXml::Analysis::ArrayRefOfEntityRef',
     coerce  => 1,
     default => sub { [] },
     handles => {
@@ -120,7 +123,7 @@ has 'study_refs' => (
 has 'sample_refs' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::ArrayRefOfEntityRef',
+    isa     => 'Bio::SRAXml::Analysis::ArrayRefOfEntityRef',
     coerce  => 1,
     default => sub { [] },
     handles => {
@@ -132,7 +135,7 @@ has 'sample_refs' => (
 has 'experiment_refs' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::ArrayRefOfEntityRef',
+    isa     => 'Bio::SRAXml::Analysis::ArrayRefOfEntityRef',
     coerce  => 1,
     default => sub { [] },
     handles => {
@@ -144,7 +147,7 @@ has 'experiment_refs' => (
 has 'run_refs' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::ArrayRefOfEntityRef',
+    isa     => 'Bio::SRAXml::Analysis::ArrayRefOfEntityRef',
     coerce  => 1,
     default => sub { [] },
     handles => {
@@ -156,7 +159,7 @@ has 'run_refs' => (
 has 'analysis_ref' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::ArrayRefOfEntityRef',
+    isa     => 'Bio::SRAXml::Analysis::ArrayRefOfEntityRef',
     coerce  => 1,
     default => sub { [] },
     handles => {
@@ -168,7 +171,7 @@ has 'analysis_ref' => (
 has 'links' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::ArrayRefOfLink',
+    isa     => 'Bio::SRAXml::Analysis::ArrayRefOfLink',
     default => sub { [] },
     handles => {
         add_link    => 'push',
@@ -181,7 +184,7 @@ has 'links' => (
 has 'attributes' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::ArrayRefOfAttr',
+    isa     => 'Bio::SRAXml::Analysis::ArrayRefOfAttr',
     default => sub { [] },
     handles => {
         add_attribute    => 'push',
@@ -194,7 +197,7 @@ has 'attributes' => (
 has 'files' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::ArrayRefOfFile',
+    isa     => 'Bio::SRAXml::Analysis::ArrayRefOfFile',
     default => sub { [] },
     coerce  => 1,
     handles => {
