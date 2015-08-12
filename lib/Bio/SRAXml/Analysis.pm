@@ -26,7 +26,8 @@ coerce 'Bio::SRAXml::Analysis' => from 'HashRef' =>
 
 
 #entity ref coercions
-
+coerce 'Bio::SRAXml::EntityRef' => from 'HashRef' =>
+  via { Bio::SRAXml::EntityRef->new( %{$_} ) };
 coerce 'Bio::SRAXml::Analysis::ArrayRefOfEntityRef' => from 'ArrayRef[HashRef]' => via {
     [ map { Bio::SRAXml::EntityRef->new( %{$_} ) } @$_ ];
 };
