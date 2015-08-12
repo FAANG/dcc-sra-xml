@@ -98,12 +98,12 @@ __DATA__
                 <LABEL>url link</LABEL>
                 <URL>http://something.com</URL>
             </URL_LINK>
-            <ENTREZ_TAG>
+            <ENTREZ_LINK>
                 <DB>foo</DB>
                 <ID>7</ID>
                 <QUERY>bar</QUERY>
                 <LABEL>entrez link</LABEL>
-            </ENTREZ_TAG>
+            </ENTREZ_LINK>
             <XREF_LINK>
                 <DB>canute</DB>
                 <ID>107</ID>

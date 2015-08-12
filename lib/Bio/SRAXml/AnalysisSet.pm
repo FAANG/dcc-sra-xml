@@ -7,26 +7,26 @@ use Bio::SRAXml::Analysis;
 with 'Bio::SRAXml::Roles::ToXML';
 
 use Moose::Util::TypeConstraints;
-subtype 'ArrayRefOfAnalysis' => as 'ArrayRef[Bio::SRAXml::Analysis]';
+subtype 'Bio::SRAXml::ArrayRefOfAnalysis' => as 'ArrayRef[Bio::SRAXml::Analysis]';
 
 #coercions for Analysis
 coerce 'Bio::SRAXml::Analysis' => from 'HashRef' =>
   via { Bio::SRAXml::Analysis->new( %{$_} ) };
 
-coerce 'ArrayRefOfAnalysis' => from 'ArrayRef[HashRef]' => via {
+coerce 'Bio::SRAXml::ArrayRefOfAnalysis' => from 'ArrayRef[HashRef]' => via {
     [ map { Bio::SRAXml::Analysis->new( %{$_} ) } @$_ ];
 };
 
-coerce 'ArrayRefOfAnalysis' => from 'HashRef' =>
+coerce 'Bio::SRAXml::ArrayRefOfAnalysis' => from 'HashRef' =>
   via { [ Bio::SRAXml::Analysis->new( %{$_} ) ] };
 
-coerce 'ArrayRefOfAnalysis' => from 'Bio::SRAXml::Analysis' => via { [$_] };
+coerce 'Bio::SRAXml::ArrayRefOfAnalysis' => from 'Bio::SRAXml::Analysis' => via { [$_] };
 no Moose::Util::TypeConstraints;
 
 has 'analysis' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'ArrayRefOfAnalysis',
+    isa     => 'Bio::SRAXml::ArrayRefOfAnalysis',
     default => sub { [] },
     coerce  => 1,
     handles => {
