@@ -1,5 +1,5 @@
 package Bio::SRAXml::Attribute;
-
+use strict;
 use namespace::autoclean;
 use Moose;
 

@@ -1,5 +1,5 @@
 package Bio::SRAXml::Roles::Identifier;
-
+use strict;
 use Moose::Role;
 
 has 'primary_id' => ( is => 'rw', isa => 'Maybe[Bio::SRAXml::NameType]' );

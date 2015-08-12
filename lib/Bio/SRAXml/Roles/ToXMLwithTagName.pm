@@ -1,5 +1,5 @@
 package Bio::SRAXml::Roles::ToXMLwithTagName;
-
+use strict;
 use Moose::Role;
 use Carp;
 requires 'write_to_xml';

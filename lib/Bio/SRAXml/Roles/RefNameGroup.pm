@@ -1,5 +1,5 @@
 package Bio::SRAXml::Roles::RefNameGroup;
-
+use strict;
 use Moose::Role;
 
 has 'refname'   => ( is => 'rw', isa => 'Maybe[Str]' );

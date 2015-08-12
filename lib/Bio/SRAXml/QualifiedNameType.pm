@@ -1,5 +1,5 @@
 package Bio::SRAXml::QualifiedNameType;
-
+use strict;
 use namespace::autoclean;
 use Moose;
 

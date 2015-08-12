@@ -1,5 +1,5 @@
 package Bio::SRAXml::Analysis;
-
+use strict;
 use namespace::autoclean;
 use Moose;
 

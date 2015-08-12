@@ -1,5 +1,5 @@
 package Bio::SRAXml::SimpleAnalysisType;
-
+use strict;
 use namespace::autoclean;
 use Moose;
 use Moose::Util::TypeConstraints;

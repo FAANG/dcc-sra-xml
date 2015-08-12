@@ -1,5 +1,5 @@
 package Bio::SRAXml::UrlLink;
-
+use strict;
 use namespace::autoclean;
 use Moose;
 

@@ -1,5 +1,5 @@
 package Bio::SRAXml::EntityRef;
-
+use strict;
 use namespace::autoclean;
 use Moose;
 

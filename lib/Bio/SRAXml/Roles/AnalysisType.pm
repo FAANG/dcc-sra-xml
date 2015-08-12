@@ -1,5 +1,5 @@
 package Bio::SRAXml::Roles::AnalysisType;
-
+use strict;
 use Moose::Role;
 
 with 'Bio::SRAXml::Roles::ToXML';

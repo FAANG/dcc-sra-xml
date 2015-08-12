@@ -1,5 +1,5 @@
 package Bio::SRAXml::EntrezLink;
-
+use strict;
 use namespace::autoclean;
 use Moose;
 

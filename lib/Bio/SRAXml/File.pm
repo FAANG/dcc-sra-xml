@@ -1,5 +1,5 @@
 package Bio::SRAXml::File;
-
+use strict;
 use namespace::autoclean;
 use Moose;
 

@@ -1,5 +1,5 @@
 package Bio::SRAXml::Roles::NameGroup;
-
+use strict;
 use Moose::Role;
 
 has 'alias'       => ( is => 'rw', isa => 'Maybe[Str]' );
