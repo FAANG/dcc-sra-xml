@@ -7,7 +7,7 @@ with 'Bio::SRAXml::Roles::ToXML';
 
 use Moose::Util::TypeConstraints;
 
-enum 'FileTypeEnum', [
+enum 'Bio::SRAXml::File::FileTypeEnum', [
     qw(
       tab
       bam
@@ -41,7 +41,7 @@ enum 'FileTypeEnum', [
 ;
 
 has 'filename'             => ( is => 'rw', isa => 'Str' );
-has 'filetype'             => ( is => 'rw', isa => 'FileTypeEnum' );
+has 'filetype'             => ( is => 'rw', isa => 'Bio::SRAXml::File::FileTypeEnum' );
 has 'checksum'             => ( is => 'rw', isa => 'Str' );
 has 'unencrypted_checksum' => ( is => 'rw', isa => 'Undef|Str' );
 has 'checksum_method' => ( is => 'rw', isa => 'Str', default => 'MD5' );
