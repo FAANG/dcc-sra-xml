@@ -219,7 +219,7 @@ sub write_to_xml {
     }
     if ( defined $self->analysis_date() ) {
         my $date_time     = $self->analysis_date();
-        my $cldr_format   = 'yyyy-mm-dd\'T\'HH:mm:ss.S\'Z\'';
+        my $cldr_format   = 'YYYY-MM-dd\'T\'HH:mm:ss.S\'Z\'';
         my $date_time_str = $date_time->format_cldr($cldr_format);
         $analysis_attrs{analysis_date} = $date_time_str;
     }

@@ -16,11 +16,11 @@ $analysis_set->add_analysis(
         center        => 'foo_center',
         analysis_date => {
             year   => 2011,
-            month  => 11,
-            day    => 18,
-            hour   => 10,
-            minute => 10,
-            second => 10,
+            month  => 12,
+            day    => 13,
+            hour   => 7,
+            minute => 8,
+            second => 9,
         },
         analysis_type => 'sample_phenotype',
         title         => 'A title',
@@ -67,25 +67,30 @@ $analysis_set->add_analysis(
 
 my ( $fh, $filename ) = tempfile();
 
-write_analysis_xml($analysis_set,$fh);
+write_analysis_xml( $analysis_set, $fh );
 
 close($fh);
 open( $fh, '<', $filename );
 
-my ( $expected, $actual );
-{
-    local $/ = undef;
-    $actual   = <$fh>;
-    $expected = <DATA>;
+my ( @expected, @actual );
+
+while (<$fh>) {
+    chomp;
+    push @actual, $_;
 }
+while (<DATA>) {
+    chomp;
+    push @expected, $_;
+}
+
 close $fh;
 
-is($actual,$expected,"AnalysisSet XML output smoke test");
+is_deeply( \@actual, \@expected, "AnalysisSet XML output smoke test" );
 done_testing();
 
 __DATA__
 <ANALYSIS_SET>
-    <ANALYSIS analysis_date="2011-10-18T10:10:10.0Z" alias="foo_alias">
+    <ANALYSIS analysis_date="2011-12-13T07:08:09.0Z" alias="foo_alias">
         <TITLE>A title</TITLE>
         <DESCRIPTION>The description</DESCRIPTION>
         <STUDY_REF refname="my_study_alias"></STUDY_REF>
