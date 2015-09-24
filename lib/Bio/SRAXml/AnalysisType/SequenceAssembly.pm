@@ -13,7 +13,7 @@ has 'partial'        => ( is => 'rw', isa => 'Bool' );
 has 'min_gap_length' => ( is => 'rw', isa => 'Int' );
 has 'mol_type'       => (
     is  => 'rw',
-    isa => 'SequenceAssemblyMolTypeEnum'
+    isa => 'Bio::SRAXml::SequenceAssemblyMolTypeEnum'
 );
 
 sub write_to_xml {

@@ -6,14 +6,14 @@ use Carp;
 use Moose::Util::TypeConstraints;
 
 #enums
-enum SimpleAnalysisTypeEnum => [
+enum 'Bio::SRAXml::SimpleAnalysisTypeEnum' => [
     qw( sequence_annotation reference_sequence sample_phenotype processed_reads )
 ];
 
-enum SequenceAssemblyMolTypeEnum =>
+enum 'Bio::SRAXml::SequenceAssemblyMolTypeEnum' =>
   [ 'genomic DNA', 'genomic RNA', 'viral cRNA' ];
 
-my $exp_type_enum_constraint = enum SequenceVariationExperimentTypeEnum => [
+my $exp_type_enum_constraint = enum 'Bio::SRAXml::SequenceVariationExperimentTypeEnum' => [
     'Whole genome sequencing',
     'Exome sequencing',
     'Genotyping by array',
@@ -21,9 +21,9 @@ my $exp_type_enum_constraint = enum SequenceVariationExperimentTypeEnum => [
     'Curation',
 ];
 
-subtype SequenceVariationExperimentTypeEnumArrayRef => as 'ArrayRef[SequenceVariationExperimentTypeEnum]';
+subtype 'Bio::SRAXml::SequenceVariationExperimentTypeEnumArrayRef' => as 'ArrayRef[Bio::SRAXml::SequenceVariationExperimentTypeEnum]';
 
-coerce SequenceVariationExperimentTypeEnumArrayRef => from 'Str' => via sub {
+coerce 'Bio::SRAXml::SequenceVariationExperimentTypeEnumArrayRef' => from 'Str' => via sub {
   $exp_type_enum_constraint->assert_valid($_);
   [$_];
 };

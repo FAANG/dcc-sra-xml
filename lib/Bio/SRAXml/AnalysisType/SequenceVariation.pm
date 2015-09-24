@@ -11,7 +11,7 @@ extends 'Bio::SRAXml::ReferenceSequenceType';
 has 'experiment_type' => (
     traits => ['Array'],
     is     => 'rw',
-    isa    => 'SequenceVariationExperimentTypeEnumArrayRef',
+    isa    => 'Bio::SRAXml::SequenceVariationExperimentTypeEnumArrayRef',
     coerce => 1,
     default => sub { [] },
     handles => {

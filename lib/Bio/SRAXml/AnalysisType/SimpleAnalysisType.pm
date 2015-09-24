@@ -6,7 +6,7 @@ use Bio::SRAXml::Types;
 
 with 'Bio::SRAXml::Roles::AnalysisType';
 
-has 'type' => ( is => 'rw', isa => 'SimpleAnalysisTypeEnum', required => 1 );
+has 'type' => ( is => 'rw', isa => 'Bio::SRAXml::SimpleAnalysisTypeEnum', required => 1 );
 
 sub write_to_xml {
     my ( $self, $write_to_xml ) = @_;
