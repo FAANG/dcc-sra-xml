@@ -13,9 +13,19 @@ use Bio::SRAXml::EntrezLink;
 use Bio::SRAXml::File;
 use Bio::SRAXml::NameType;
 use Bio::SRAXml::QualifiedNameType;
+use Bio::SRAXml::ReferenceAssemblyType;
+use Bio::SRAXml::ReferenceSequenceType;
+use Bio::SRAXml::Sequence;
+use Bio::SRAXml::AnalysisType::SimpleAnalysisType;
 use Bio::SRAXml::UrlLink;
 use Bio::SRAXml::XrefLink;
-use Bio::SRAXml::SimpleAnalysisType;
+
+use Bio::SRAXml::AnalysisType::ReferenceAlignment;
+use Bio::SRAXml::AnalysisType::SequenceAssembly;
+use Bio::SRAXml::AnalysisType::SequenceVariation;
+use Bio::SRAXml::AnalysisType::SimpleAnalysisType;
+
+use Bio::SRAXml::Types;
 
 sub write_analysis_xml {
     my ( $analysis_set, $filehandle ) = @_;

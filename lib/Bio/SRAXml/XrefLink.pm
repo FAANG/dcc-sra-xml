@@ -2,12 +2,13 @@ package Bio::SRAXml::XrefLink;
 use strict;
 use namespace::autoclean;
 use Moose;
+use Bio::SRAXml::Types;
 
 with 'Bio::SRAXml::Roles::Link';
 
 has 'db'    => ( is => 'rw', isa => 'Str' );
 has 'id'    => ( is => 'rw', isa => 'Int' );
-has 'label' => ( is => 'rw', isa => 'Maybe[Str]' );
+has 'label' => ( is => 'rw', isa => 'Str' );
 
 sub write_to_xml {
     my ( $self, $write_to_xml ) = @_;

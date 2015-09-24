@@ -2,50 +2,16 @@ package Bio::SRAXml::File;
 use strict;
 use namespace::autoclean;
 use Moose;
+use Bio::SRAXml::Types;
 
 with 'Bio::SRAXml::Roles::ToXML';
 
-use Moose::Util::TypeConstraints;
-
-enum 'Bio::SRAXml::File::FileTypeEnum', [
-    qw(
-      tab
-      bam
-      bai
-      cram
-      vcf
-      vcf_aggregate
-      tabix
-      wig
-      bed
-      gff
-      fasta
-      fastq
-      contig_fasta
-      contig_flatfile
-      scaffold_fasta
-      scaffold_flatfile
-      scaffold_agp
-      chromosome_fasta
-      chromosome_flatfile
-      chromosome_agp
-      chromosome_list
-      unlocalised_contig_list
-      unlocalised_scaffold_list
-      sample_list
-      readme_file
-      phenotype_file
-      other
-      )
-]
-;
-
 has 'filename'             => ( is => 'rw', isa => 'Str' );
-has 'filetype'             => ( is => 'rw', isa => 'Bio::SRAXml::File::FileTypeEnum' );
+has 'filetype'             => ( is => 'rw', isa => 'FileTypeEnum' );
 has 'checksum'             => ( is => 'rw', isa => 'Str' );
-has 'unencrypted_checksum' => ( is => 'rw', isa => 'Undef|Str' );
+has 'unencrypted_checksum' => ( is => 'rw', isa => 'Str' );
 has 'checksum_method' => ( is => 'rw', isa => 'Str', default => 'MD5' );
-has 'checklist'       => ( is => 'rw', isa => 'Undef|Str' );
+has 'checklist'       => ( is => 'rw', isa => 'Str' );
 
 sub write_to_xml {
     my ( $self, $xml_writer ) = @_;

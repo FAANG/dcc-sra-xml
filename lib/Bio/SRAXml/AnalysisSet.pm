@@ -2,28 +2,15 @@ package Bio::SRAXml::AnalysisSet;
 use strict;
 use namespace::autoclean;
 use Moose;
+use Bio::SRAXml::Types;
 use Bio::SRAXml::Analysis;
 
 with 'Bio::SRAXml::Roles::ToXML';
 
-use Moose::Util::TypeConstraints;
-subtype 'Bio::SRAXml::AnalysisSet::ArrayRefOfAnalysis' => as 'ArrayRef[Bio::SRAXml::Analysis]';
-
-#coercions for Analysis
-coerce 'Bio::SRAXml::AnalysisSet::ArrayRefOfAnalysis' => from 'ArrayRef[HashRef]' => via {
-    [ map { Bio::SRAXml::Analysis->new( %{$_} ) } @$_ ];
-};
-
-coerce 'Bio::SRAXml::AnalysisSet::ArrayRefOfAnalysis' => from 'HashRef' =>
-  via { [ Bio::SRAXml::Analysis->new( %{$_} ) ] };
-
-coerce 'Bio::SRAXml::AnalysisSet::ArrayRefOfAnalysis' => from 'Bio::SRAXml::Analysis' => via { [$_] };
-no Moose::Util::TypeConstraints;
-
 has 'analysis' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::AnalysisSet::ArrayRefOfAnalysis',
+    isa     => 'Bio::SRAXml::AnalysisArrayRef',
     default => sub { [] },
     coerce  => 1,
     handles => {

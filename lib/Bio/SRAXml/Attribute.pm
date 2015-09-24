@@ -2,12 +2,13 @@ package Bio::SRAXml::Attribute;
 use strict;
 use namespace::autoclean;
 use Moose;
+use Bio::SRAXml::Types;
 
 with 'Bio::SRAXml::Roles::ToXMLwithTagName';
 
 has 'tag'   => ( is => 'rw', isa => 'Str' );
-has 'value' => ( is => 'rw', isa => 'Maybe[Str]' );
-has 'units' => ( is => 'rw', isa => 'Maybe[Str]' );
+has 'value' => ( is => 'rw', isa => 'Str' );
+has 'units' => ( is => 'rw', isa => 'Str' );
 
 sub write_to_xml {
     my ( $self, $xml_writer, $tag_name ) = @_;

@@ -2,6 +2,7 @@ package Bio::SRAXml::EntityRef;
 use strict;
 use namespace::autoclean;
 use Moose;
+use Bio::SRAXml::Types;
 
 with 'Bio::SRAXml::Roles::Identifier', 'Bio::SRAXml::Roles::RefNameGroup',
   'Bio::SRAXml::Roles::ToXMLwithTagName';

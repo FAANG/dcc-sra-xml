@@ -2,13 +2,14 @@ package Bio::SRAXml::EntrezLink;
 use strict;
 use namespace::autoclean;
 use Moose;
+use Bio::SRAXml::Types;
 
 with 'Bio::SRAXml::Roles::Link', 'Bio::SRAXml::Roles::ToXML';
 
 has 'db'    => ( is => 'rw', isa => 'Str' );
 has 'id'    => ( is => 'rw', isa => 'Int' );
 has 'query' => ( is => 'rw', isa => 'Str' );
-has 'label' => ( is => 'rw', isa => 'Maybe[Str]' );
+has 'label' => ( is => 'rw', isa => 'Str' );
 
 sub write_to_xml {
     my ( $self, $xml_writer ) = @_;

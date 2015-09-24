@@ -2,6 +2,7 @@ package Bio::SRAXml::QualifiedNameType;
 use strict;
 use namespace::autoclean;
 use Moose;
+use Bio::SRAXml::Types;
 
 extends 'Bio::SRAXml::NameType';
 

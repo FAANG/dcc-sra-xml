@@ -6,9 +6,13 @@ use File::Temp qw/ tempfile /;
 use lib "$Bin/../lib";
 
 use Bio::SRAXml qw(write_analysis_xml);
+use Bio::SRAXml::AnalysisType::SimpleAnalysisType;
 use XML::Writer;
+use Bio::SRAXml::Types ;
+
 
 my $analysis_set = Bio::SRAXml::AnalysisSet->new();
+
 
 $analysis_set->add_analysis(
     {
@@ -22,7 +26,7 @@ $analysis_set->add_analysis(
             minute => 8,
             second => 9,
         },
-        analysis_type => 'sample_phenotype',
+        analysis_type =>  'sample_phenotype',
         title         => 'A title',
         description   => 'The description',
         study_refs    => { refname => 'my_study_alias', },
@@ -30,11 +34,11 @@ $analysis_set->add_analysis(
             refname => 'my_sample_alias',
             label   => 'bob',
         },
-        attributes => {
-            attr1 => 'val1',
-            attr2 => 'val2',
-            attr3 => [ 4, 'kg' ],
-        },
+        attributes => [
+            {tag => 'attr1',value => 'val1'},
+            {tag => 'attr2',value => 'val2'},
+            {tag => 'attr3',value => '4', units => 'kg'},
+        ],
         links => [
             {
                 url   => 'http://something.com',
@@ -117,12 +121,12 @@ __DATA__
         </ANALYSIS_LINKS>
         <ANALYSIS_ATTRIBUTES>
             <ANALYSIS_ATTRIBUTE>
-                <TAG>attr2</TAG>
-                <VALUE>val2</VALUE>
-            </ANALYSIS_ATTRIBUTE>
-            <ANALYSIS_ATTRIBUTE>
                 <TAG>attr1</TAG>
                 <VALUE>val1</VALUE>
+            </ANALYSIS_ATTRIBUTE>
+            <ANALYSIS_ATTRIBUTE>
+                <TAG>attr2</TAG>
+                <VALUE>val2</VALUE>
             </ANALYSIS_ATTRIBUTE>
             <ANALYSIS_ATTRIBUTE>
                 <TAG>attr3</TAG>
