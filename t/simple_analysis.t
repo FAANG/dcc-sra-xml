@@ -3,9 +3,11 @@ use strict;
 use Test::More;
 use FindBin qw($Bin);
 use File::Temp qw/ tempfile /;
-use lib "$Bin/../lib";
+use lib ("$Bin/../lib","$Bin/lib");
 
+use TestHelper;
 use Bio::SRAXml qw(write_xml_file);
+use Test::XML;
 
 my $analysis_set = Bio::SRAXml::AnalysisSet->new();
 
@@ -68,22 +70,10 @@ my ( $fh, $filename ) = tempfile();
 
 write_xml_file( analysis_set => $analysis_set, filename => $filename );
 
-open( $fh, '<', $filename );
+my $actual = TestHelper::file_to_str(filename => $filename);
+my $expected = TestHelper::file_to_str(fh => \*DATA);
 
-my ( @expected, @actual );
-
-while (<$fh>) {
-    chomp;
-    push @actual, $_;
-}
-while (<DATA>) {
-    chomp;
-    push @expected, $_;
-}
-
-close $fh;
-
-is_deeply( \@actual, \@expected, "AnalysisSet XML output smoke test" );
+is_xml( $actual, $expected, "Analysis with simple analysis type" );
 done_testing();
 
 __DATA__
@@ -100,7 +90,7 @@ __DATA__
             <SAMPLE_PHENOTYPE />
         </ANALYSIS_TYPE>
         <FILES>
-            <FILE checksum="abcdefg" filetype="bam" filename="afile.bam" checksum_method="MD5" />
+            <FILE filename="afile.bam" filetype="bam" checksum_method="MD5" checksum="abcdefg" />
         </FILES>
         <ANALYSIS_LINKS>
             <ANALYSIS_LINK>
