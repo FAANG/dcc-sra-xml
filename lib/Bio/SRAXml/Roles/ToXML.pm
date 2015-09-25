@@ -17,6 +17,12 @@ use Moose::Role;
 use Carp;
 use MooseX::Params::Validate;
 
+=head1 Description
+  
+  Role to tag classes as being writeable to xml.
+  
+=cut
+
 requires 'write_to_xml';
 
 before 'write_to_xml' => sub {

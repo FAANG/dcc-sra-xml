@@ -19,6 +19,16 @@ use Moose;
 use Bio::SRAXml::Types;
 use Bio::SRAXml::UrlLink;
 
+=head1 Description
+  
+  Class for representing a reference assembly. Can either be standard (in which
+  case it needs a refname and an accession, or custom, in which case it needs a
+  url link and a description)
+  
+=cut
+
+#TODO divide this into two types.
+
 with 'Bio::SRAXml::Roles::ToXML';
 
 has 'refname'   => ( is => 'rw', isa => 'Str' );

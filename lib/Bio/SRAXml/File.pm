@@ -11,20 +11,28 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
+
 package Bio::SRAXml::File;
 use strict;
 use namespace::autoclean;
 use Moose;
 use Bio::SRAXml::Types;
 
+=head1 Description
+  
+  Class for files in a submission.
+  
+=cut
+
 with 'Bio::SRAXml::Roles::ToXML';
 
-has 'filename'             => ( is => 'rw', isa => 'Str' );
-has 'filetype'             => ( is => 'rw', isa => 'FileTypeEnum' );
-has 'checksum'             => ( is => 'rw', isa => 'Str' );
+has 'filename' => ( is => 'rw', isa => 'Str',          required => 1 );
+has 'filetype' => ( is => 'rw', isa => 'FileTypeEnum', required => 1 );
+has 'checksum' => ( is => 'rw', isa => 'Str',          required => 1 );
 has 'unencrypted_checksum' => ( is => 'rw', isa => 'Str' );
-has 'checksum_method' => ( is => 'rw', isa => 'Str', default => 'MD5' );
-has 'checklist'       => ( is => 'rw', isa => 'Str' );
+has 'checksum_method' =>
+  ( is => 'rw', isa => 'Str', default => 'MD5', required => 1 );
+has 'checklist' => ( is => 'rw', isa => 'Str' );
 
 sub write_to_xml {
     my ( $self, $xml_writer ) = @_;

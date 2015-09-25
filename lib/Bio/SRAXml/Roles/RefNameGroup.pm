@@ -15,6 +15,12 @@ package Bio::SRAXml::Roles::RefNameGroup;
 use strict;
 use Moose::Role;
 
+=head1 Description
+  
+  Role to mixin common refnamegroup attribute groups (using RefNameGroup)
+  
+=cut
+
 has 'refname'   => ( is => 'rw', isa => 'Str' );
 has 'ref_center'   => ( is => 'rw', isa => 'Str' );
 has 'accession'   => ( is => 'rw', isa => 'Str' );

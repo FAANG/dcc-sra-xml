@@ -11,6 +11,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
+
 package Bio::SRAXml::UrlLink;
 use strict;
 use namespace::autoclean;
@@ -19,8 +20,14 @@ use Bio::SRAXml::Types;
 use MooseX::Types::URI qw(Uri);
 with 'Bio::SRAXml::Roles::Link', 'Bio::SRAXml::Roles::ToXML';
 
-has 'label' => ( is => 'rw', isa => 'Str' );
-has 'url' => ( is => 'rw', isa => Uri, coerce => 1 );
+=head1 Description
+  
+  Class for representing a URL with a label
+  
+=cut
+
+has 'label' => ( is => 'rw', isa => 'Str', required => 1 );
+has 'url' => ( is => 'rw', isa => Uri, coerce => 1, required => 1 );
 
 sub write_to_xml {
     my ( $self, $xml_writer ) = @_;
@@ -28,8 +35,7 @@ sub write_to_xml {
     $xml_writer->startTag("URL_LINK");
 
     $xml_writer->dataElement( "LABEL", $self->label() );
-    $xml_writer->dataElement( "URL",   $self->url()->as_string )
-      if ( $self->url() );
+    $xml_writer->dataElement( "URL",   $self->url()->as_string );
 
     $xml_writer->endTag("URL_LINK");
 }

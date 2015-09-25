@@ -20,7 +20,13 @@ use Bio::SRAXml::Types;
 
 with 'Bio::SRAXml::Roles::ToXML';
 
-has [ 'refname', 'label' ] => ( is => 'rw', isa => 'Undef|Str' );
+=head1 Description
+  
+  Class for representing a reference sequence.
+  
+=cut
+
+has [ 'refname', 'label' ] => ( is => 'rw', isa => 'Str' );
 has 'accession' => ( is => 'rw', isa => 'Str', required => 1 );
 
 sub write_to_xml {

@@ -18,7 +18,11 @@ use Moose;
 use Bio::SRAXml::Types;
 
 extends 'Bio::SRAXml::NameType';
-
+=head1 Description
+  
+  Class for representing a single identifier with a namespace (see QualifiedNameType in SRA.common.xsd)
+  
+=cut
 
 has 'namespace' => ( is => 'rw', isa => 'Str' );
 

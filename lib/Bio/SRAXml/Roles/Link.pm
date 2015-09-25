@@ -17,4 +17,10 @@ use Moose::Role;
 
 with 'Bio::SRAXml::Roles::ToXML';
 
+=head1 Description
+  
+  Role to tag classes that can be used as Links (LinkType in SRA.common.xsd)
+  
+=cut
+
 1;

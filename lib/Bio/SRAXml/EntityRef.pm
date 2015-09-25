@@ -17,6 +17,13 @@ use namespace::autoclean;
 use Moose;
 use Bio::SRAXml::Types;
 
+=head1 Description
+  
+  Class for referring to other archived entities. e.g. the SAMPLE_REF and 
+  EXPERIMENT_REF elements in Analysis.
+  
+=cut
+
 with 'Bio::SRAXml::Roles::Identifier', 'Bio::SRAXml::Roles::RefNameGroup',
   'Bio::SRAXml::Roles::ToXMLwithTagName';
 

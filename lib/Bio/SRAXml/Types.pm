@@ -18,6 +18,12 @@ use warnings;
 use Carp;
 use Moose::Util::TypeConstraints;
 
+=head1 Description
+  
+  A library for moose types and coercions used in this project. 
+  
+=cut
+
 #enums
 enum 'Bio::SRAXml::SimpleAnalysisTypeEnum' => [
     qw( sequence_annotation reference_sequence sample_phenotype processed_reads )
@@ -131,6 +137,7 @@ coerce 'Bio::SRAXml::XrefLink' => from 'HashRef' =>
 
 role_type 'Bio::SRAXml::Roles::AnalysisType';
 role_type 'Bio::SRAXml::Roles::Link';
+role_type 'Bio::SRAXml::Roles::WriteableEntity';
 
 subtype 'Bio::SRAXml::Roles::LinkArrayRef' => as
   'ArrayRef[Bio::SRAXml::Roles::Link]';

@@ -19,6 +19,15 @@ use Bio::SRAXml::Types;
 
 with 'Bio::SRAXml::Roles::Link';
 
+=head1 Description
+  
+  Class for representing a cross reference. Use should follow the 
+  INSDC controlled vocabulary of permitted cross references.
+
+  See http://www.insdc.org/db_xref.html for details.
+  
+=cut
+
 has 'db'    => ( is => 'rw', isa => 'Str' );
 has 'id'    => ( is => 'rw', isa => 'Int' );
 has 'label' => ( is => 'rw', isa => 'Str' );

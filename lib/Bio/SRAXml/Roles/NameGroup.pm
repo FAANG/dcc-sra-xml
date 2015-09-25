@@ -15,6 +15,12 @@ package Bio::SRAXml::Roles::NameGroup;
 use strict;
 use Moose::Role;
 
+=head1 Description
+  
+  Role to mixin common namegroup attribute groups (using NameGroup)
+  
+=cut
+
 has 'alias'       => ( is => 'rw', isa => 'Str' );
 has 'center_name' => ( is => 'rw', isa => 'Str' );
 has 'broker_name' => ( is => 'rw', isa => 'Str' );

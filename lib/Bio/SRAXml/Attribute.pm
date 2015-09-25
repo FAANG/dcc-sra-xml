@@ -17,6 +17,13 @@ use namespace::autoclean;
 use Moose;
 use Bio::SRAXml::Types;
 
+=head1 Description
+  
+  Class to model the common AttributeType. Tag name is required to specify if 
+  it is to be serialized as SAMPLE_ATTRIBUTE or STUDY_ATTRIBUTE...(etc).
+  
+=cut
+
 with 'Bio::SRAXml::Roles::ToXMLwithTagName';
 
 has 'tag'   => ( is => 'rw', isa => 'Str' );

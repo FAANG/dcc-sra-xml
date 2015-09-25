@@ -22,6 +22,12 @@ use Bio::SRAXml::Sequence;
 
 with 'Bio::SRAXml::Roles::ToXML';
 
+=head1 Description
+  
+  Class for representing a set of reference sequences in an assembly.
+  
+=cut
+
 has 'assembly' => (
     is       => 'rw',
     isa      => 'Bio::SRAXml::ReferenceAssemblyType',

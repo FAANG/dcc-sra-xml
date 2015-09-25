@@ -17,6 +17,13 @@ use namespace::autoclean;
 use Moose;
 use Bio::SRAXml::Types;
 
+=head1 Description
+  
+  Class for modelling links to Entrez. db is required, 
+  as is either id or query (mutually exclusive). 
+  
+=cut
+
 with 'Bio::SRAXml::Roles::Link', 'Bio::SRAXml::Roles::ToXML';
 
 has 'db' => ( is => 'rw', isa => 'Str', required => 1 );

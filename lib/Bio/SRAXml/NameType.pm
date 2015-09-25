@@ -17,6 +17,13 @@ use namespace::autoclean;
 use Moose;
 use Bio::SRAXml::Types;
 
+
+=head1 Description
+  
+  Class for representing a single identifier (see NameType in SRA.common.xsd)
+  
+=cut
+
 with 'Bio::SRAXml::Roles::ToXMLwithTagName';
 
 has 'label' => ( is => 'rw', isa => 'Str' );

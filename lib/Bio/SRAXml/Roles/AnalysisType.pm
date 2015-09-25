@@ -18,6 +18,12 @@ use namespace::autoclean;
 
 with 'Bio::SRAXml::Roles::ToXML';
 
+=head1 Description
+  
+  Role to tag classes that can be used as an AnalysisType.
+  
+=cut
+
 before 'write_to_xml' => sub {
   my ($self,$xml_writer) = @_;
   

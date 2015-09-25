@@ -15,6 +15,12 @@ package Bio::SRAXml::Roles::Identifier;
 use strict;
 use Moose::Role;
 
+=head1 Description
+  
+  Role to mixin common identifier type attributes (using com:IdentifierType)
+  
+=cut
+
 has 'primary_id' => ( is => 'rw', isa => 'Bio::SRAXml::NameType' );
 has 'secondary_id' => (
     traits  => ['Array'],
