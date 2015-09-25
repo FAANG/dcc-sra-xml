@@ -22,10 +22,11 @@ $analysis_set->add_analysis(
         description   => 'The description',
         study_refs    => {
             refname      => 'my_study_alias',
+            refcenter    => 'FRED',
             accession    => 'A1',
             primary_id   => { name => 'A1' },
-            secondary_id => { name => 'A-A1', },
-            external_id  => { namespace => 'SUE', name => 'EXT-A-A1' },
+            secondary_id => { name => 'A-A1' },
+            external_id  => { namespace => 'SUE', name => 'EXT-A-A1',label => 'extlabel' },
             uuid         => { name      => '348923usdfgk0934-234oij' },
             submitter_id => { namespace => 'BOB', name => 'SGVP' }
         },
@@ -55,11 +56,11 @@ __DATA__
     <ANALYSIS alias="foo_alias" center_name="RITA" broker_name="SUE" accession="A1">
         <TITLE>A title</TITLE>
         <DESCRIPTION>The description</DESCRIPTION>
-        <STUDY_REF refname="my_study_alias" accession="A1">
+        <STUDY_REF refname="my_study_alias" accession="A1" refcenter="FRED">
           <IDENTIFIERS>
              <PRIMARY_ID>A1</PRIMARY_ID>
              <SECONDARY_ID>A-A1</SECONDARY_ID>
-             <EXTERNAL_ID namespace="SUE">EXT-A-A1</EXTERNAL_ID>
+             <EXTERNAL_ID namespace="SUE" label="extlabel">EXT-A-A1</EXTERNAL_ID>
              <SUBMITTER_ID namespace="BOB">SGVP</SUBMITTER_ID>
              <UUID>348923usdfgk0934-234oij</UUID>
           </IDENTIFIERS>
