@@ -32,16 +32,13 @@ use Bio::SRAXml::AnalysisType::SequenceAssembly;
 use Bio::SRAXml::AnalysisType::SequenceVariation;
 use Bio::SRAXml::AnalysisType::SimpleAnalysisType;
 
-my %SCHEMA_LOCATIONS = (
-    analysis => 'http://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/SRA.analysis.xsd',
-    common   => 'http://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/SRA.common.xsd',
-);
+our $SCHEMA_LOCATION = 'http://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/ENA.root.xsd';
 
 sub write_analysis_xml_file {
     my ( $analysis_set, $filename ) = validated_list(
         \@_,
         analysis_set => { isa => 'Bio::SRAXml::AnalysisSet' },
-        filename => { isa => 'Str' }
+        filename     => { isa => 'Str' }
     );
 
     my $output = IO::File->new( '>' . $filename );
@@ -58,21 +55,13 @@ sub write_analysis_xml_file {
     $writer->end();
     $output->close();
 
-    validate_against_schema( schema => 'analysis', filename => $filename );
+    validate_against_schema( filename => $filename );
 }
 
 sub validate_against_schema {
-    my ( $schema, $filename ) = validated_list(
-        \@_,
-        schema   => { isa => 'Str' },
-        filename => { isa => 'Str' },
-    );
+    my ($filename) = validated_list( \@_, filename => { isa => 'Str' }, );
 
-    if ( !$SCHEMA_LOCATIONS{$schema} ) {
-        confess "$schema is not a known schema";
-    }
-    my $xmlschema =
-      XML::LibXML::Schema->new( location => $SCHEMA_LOCATIONS{$schema} );
+    my $xmlschema = XML::LibXML::Schema->new( location => $SCHEMA_LOCATION );
 
     my $doc = XML::LibXML->new->parse_file($filename);
 
