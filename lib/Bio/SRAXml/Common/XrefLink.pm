@@ -29,7 +29,7 @@ with 'Bio::SRAXml::Roles::Link';
 =cut
 
 has 'db'    => ( is => 'rw', isa => 'Str' );
-has 'id'    => ( is => 'rw', isa => 'Int' );
+has 'id'    => ( is => 'rw', isa => 'Str' );
 has 'label' => ( is => 'rw', isa => 'Str' );
 
 sub write_to_xml {
