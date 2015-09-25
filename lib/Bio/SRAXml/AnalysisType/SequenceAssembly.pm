@@ -34,16 +34,16 @@ sub write_to_xml {
 
     $xml_writer->startTag("SEQUENCE_ASSEMBLY");
 
-    $xml_writer->dataTag( "NAME", $self->name ) if ( $self->name );
-    $xml_writer->dataTag( "PARTIAL", $self->partial ? 'true' : 'false' )
+    $xml_writer->dataElement( "NAME", $self->name ) if ( $self->name );
+    $xml_writer->dataElement( "PARTIAL", $self->partial ? 'true' : 'false' )
       if ( defined $self->partial );
 
-    $xml_writer->dataTag( "COVERAGE", $self->coverage ) if ( $self->coverage );
-    $xml_writer->dataTag( "PROGRAM",  $self->program )  if ( $self->program );
-    $xml_writer->dataTag( "PLATFORM", $self->platform ) if ( $self->platform );
-    $xml_writer->dataTag( "MIN_GAP_LENGTH", $self->min_gap_length )
+    $xml_writer->dataElement( "COVERAGE", $self->coverage ) if ( $self->coverage );
+    $xml_writer->dataElement( "PROGRAM",  $self->program )  if ( $self->program );
+    $xml_writer->dataElement( "PLATFORM", $self->platform ) if ( $self->platform );
+    $xml_writer->dataElement( "MIN_GAP_LENGTH", $self->min_gap_length )
       if ( $self->min_gap_length );
-    $xml_writer->dataTag( "MOL_TYPE", $self->mol_type ) if ( $self->mol_type );
+    $xml_writer->dataElement( "MOL_TYPE", $self->mol_type ) if ( $self->mol_type );
 
     $xml_writer->endTag("SEQUENCE_ASSEMBLY");
 

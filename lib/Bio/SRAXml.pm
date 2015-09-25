@@ -184,7 +184,7 @@ sub validate_against_schema {
     my $doc = XML::LibXML->new->parse_file($filename);
 
     eval { $xmlschema->validate($doc); };
-    carp "XML Document is not valid: " . $@
+    croak "XML Document is not valid: " . $@
       if $@;
 }
 

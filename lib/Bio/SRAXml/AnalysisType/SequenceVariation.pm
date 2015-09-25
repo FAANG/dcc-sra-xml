@@ -43,14 +43,14 @@ sub write_to_xml {
     $self->SUPER::write_to_xml($xml_writer);
 
     for my $et ( $self->all_experiment_types ) {
-        $xml_writer->dataTag( "EXPERIMENT_TYPE", $et );
+        $xml_writer->dataElement( "EXPERIMENT_TYPE", $et );
     }
 
-    $xml_writer->dataTag( "PROGRAM",  $self->program )  if ( $self->program );
-    $xml_writer->dataTag( "PLATFORM", $self->platform ) if ( $self->platform );
+    $xml_writer->dataElement( "PROGRAM",  $self->program )  if ( $self->program );
+    $xml_writer->dataElement( "PLATFORM", $self->platform ) if ( $self->platform );
     if ( defined $self->imputation ) {
         my $is_imputation = $self->imputation ? 'true' : 'false';
-        $xml_writer->dataTag( "IMPUTATION", $is_imputation );
+        $xml_writer->dataElement( "IMPUTATION", $is_imputation );
     }
 
     $xml_writer->endTag("SEQUENCE_VARIATION");

@@ -47,7 +47,7 @@ sub write_to_xml {
     }
     elsif ( $self->url_link ) {
         $xml_writer->startTag("CUSTOM");
-        $xml_writer->dataTag( "DESCRIPTION", $self->description )
+        $xml_writer->dataElement( "DESCRIPTION", $self->description )
           if ( $self->description );
         $xml_writer->url_link->write_to_xml($xml_writer);
         $xml_writer->endTag("CUSTOM");
