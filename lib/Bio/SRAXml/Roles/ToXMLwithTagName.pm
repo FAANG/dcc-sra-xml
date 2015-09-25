@@ -11,6 +11,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
+
 package Bio::SRAXml::Roles::ToXMLwithTagName;
 use strict;
 use Moose::Role;
@@ -26,9 +27,12 @@ use MooseX::Params::Validate;
 requires 'write_to_xml';
 
 before 'write_to_xml' => sub {
-    my ($self) = shift;
-    my ( $xml_writer, $tag_name ) =
-      pos_validated_list( \@_, { isa => 'XML::Writer' }, { isa => 'Str' } );
+    my ( $self, $xml_writer, $tag_name ) = pos_validated_list(
+        \@_,
+        { isa => 'Any' },
+        { isa => 'XML::Writer' },
+        { isa => 'Str' }
+    );
 };
 
 1;

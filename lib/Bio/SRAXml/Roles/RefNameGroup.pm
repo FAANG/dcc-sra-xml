@@ -22,7 +22,7 @@ use Moose::Role;
 =cut
 
 has 'refname'   => ( is => 'rw', isa => 'Str' );
-has 'ref_center'   => ( is => 'rw', isa => 'Str' );
+has 'refcenter'   => ( is => 'rw', isa => 'Str' );
 has 'accession'   => ( is => 'rw', isa => 'Str' );
 
 sub refname_group_as_hash {
@@ -34,8 +34,8 @@ sub refname_group_as_hash {
     $h{refname} = $self->refname();
   }
   
-  if (defined $self->ref_center()) {
-    $h{ref_center} = $self->ref_center();
+  if (defined $self->refcenter()) {
+    $h{refcenter} = $self->refcenter();
   }
   
   if (defined $self->accession()){

@@ -11,6 +11,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
+
 package Bio::SRAXml::Roles::Identifier;
 use strict;
 use Moose::Role;
@@ -21,7 +22,7 @@ use Moose::Role;
   
 =cut
 
-has 'primary_id' => ( is => 'rw', isa => 'Bio::SRAXml::NameType' );
+has 'primary_id' => ( is => 'rw', isa => 'Bio::SRAXml::NameType', coerce => 1 );
 has 'secondary_id' => (
     traits  => ['Array'],
     is      => 'rw',
@@ -84,19 +85,19 @@ sub write_identifiers_xml {
         $xml_writer->startTag('IDENTIFIERS');
 
         if ( $self->primary_id() ) {
-            $xml_writer->dataElement( 'PRIMARY_ID', $self->primary_id() );
+            $self->primary_id()->write_to_xml( $xml_writer, 'PRIMARY_ID' );
         }
         for ( $self->all_secondary_ids() ) {
-            $_->write_to_xml('SECONDARY_ID');
+            $_->write_to_xml( $xml_writer, 'SECONDARY_ID' );
         }
         for ( $self->all_external_ids() ) {
-            $_->write_to_xml('EXTERNAL_ID');
+            $_->write_to_xml( $xml_writer, 'EXTERNAL_ID' );
         }
         for ( $self->all_submitter_ids() ) {
-            $_->write_to_xml('SUBMITTER_ID');
+            $_->write_to_xml( $xml_writer, 'SUBMITTER_ID' );
         }
         for ( $self->all_uuids() ) {
-            $_->write_to_xml('UUID');
+            $_->write_to_xml( $xml_writer, 'UUID' );
         }
         $xml_writer->endTag('IDENTIFIERS');
     }
