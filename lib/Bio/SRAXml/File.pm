@@ -37,18 +37,20 @@ has 'checklist' => ( is => 'rw', isa => 'Str' );
 sub write_to_xml {
     my ( $self, $xml_writer ) = @_;
 
-    my %attrs = (
+    my @attrs = (
         filename        => $self->filename(),
         filetype        => $self->filetype(),
-        checksum        => $self->checksum(),
         checksum_method => $self->checksum_method(),
+        checksum        => $self->checksum(),
     );
 
-    $attrs{unencrypted_checksum} = $self->unencrypted_checksum()
+    push @attrs, ( unencrypted_checksum => $self->unencrypted_checksum() )
       if ( defined $self->unencrypted_checksum() );
-    $attrs{checklist} = $self->checklist() if ( defined $self->checklist() );
 
-    $xml_writer->emptyTag( 'FILE', %attrs );
+    push @attrs, ( checklist => $self->checklist() )
+      if ( defined $self->checklist() );
+
+    $xml_writer->emptyTag( 'FILE', @attrs );
 }
 
 __PACKAGE__->meta->make_immutable;
