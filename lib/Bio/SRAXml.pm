@@ -29,7 +29,7 @@ our $VERSION = '0.01';
 
     use Bio::SRAXml qw(write_xml_file);
 
-    my $analysis_set = Bio::SRAXml::AnalysisSet->new();
+    my $analysis_set = Bio::SRAXml::Analysis::AnalysisSet->new();
 
     $analysis_set->add_analysis({
         alias         => 'foo_alias',
@@ -113,25 +113,25 @@ use XML::LibXML;
 use MooseX::Params::Validate;
 
 use Bio::SRAXml::Types;
-use Bio::SRAXml::Analysis;
-use Bio::SRAXml::AnalysisSet;
-use Bio::SRAXml::Attribute;
-use Bio::SRAXml::EntityRef;
-use Bio::SRAXml::EntrezLink;
+use Bio::SRAXml::Analysis::Analysis;
+use Bio::SRAXml::Analysis::AnalysisSet;
+use Bio::SRAXml::Common::Attribute;
+use Bio::SRAXml::Common::EntityRef;
+use Bio::SRAXml::Common::EntrezLink;
 use Bio::SRAXml::File;
-use Bio::SRAXml::NameType;
-use Bio::SRAXml::QualifiedNameType;
-use Bio::SRAXml::ReferenceAssemblyType;
-use Bio::SRAXml::ReferenceSequenceType;
-use Bio::SRAXml::Sequence;
-use Bio::SRAXml::AnalysisType::SimpleAnalysisType;
-use Bio::SRAXml::UrlLink;
-use Bio::SRAXml::XrefLink;
+use Bio::SRAXml::Common::NameType;
+use Bio::SRAXml::Common::QualifiedNameType;
+use Bio::SRAXml::Common::ReferenceAssemblyType;
+use Bio::SRAXml::Common::ReferenceSequenceType;
+use Bio::SRAXml::Common::Sequence;
+use Bio::SRAXml::Analysis::SimpleAnalysisType;
+use Bio::SRAXml::Common::UrlLink;
+use Bio::SRAXml::Common::XrefLink;
 
-use Bio::SRAXml::AnalysisType::ReferenceAlignment;
-use Bio::SRAXml::AnalysisType::SequenceAssembly;
-use Bio::SRAXml::AnalysisType::SequenceVariation;
-use Bio::SRAXml::AnalysisType::SimpleAnalysisType;
+use Bio::SRAXml::Analysis::ReferenceAlignment;
+use Bio::SRAXml::Analysis::SequenceAssembly;
+use Bio::SRAXml::Analysis::SequenceVariation;
+use Bio::SRAXml::Analysis::SimpleAnalysisType;
 
 our @EXPORT_OK = qw(write_xml_file);
 

@@ -11,38 +11,34 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-package Bio::SRAXml::Attribute;
+package Bio::SRAXml::Common::NameType;
 use strict;
 use namespace::autoclean;
 use Moose;
 use Bio::SRAXml::Types;
 
+
 =head1 Description
   
-  Class to model the common AttributeType. Tag name is required to specify if 
-  it is to be serialized as SAMPLE_ATTRIBUTE or STUDY_ATTRIBUTE...(etc).
+  Class for representing a single identifier (see NameType in SRA.common.xsd)
   
 =cut
 
 with 'Bio::SRAXml::Roles::ToXMLwithTagName';
 
-has 'tag'   => ( is => 'rw', isa => 'Str' );
-has 'value' => ( is => 'rw', isa => 'Str' );
-has 'units' => ( is => 'rw', isa => 'Str' );
+has 'label' => ( is => 'rw', isa => 'Str' );
+has 'name'  => ( is => 'rw', isa => 'Str' );
 
 sub write_to_xml {
     my ( $self, $xml_writer, $tag_name ) = @_;
 
-    $xml_writer->startTag($tag_name);
+    my %attrs;
 
-    $xml_writer->dataElement( 'TAG',   $self->tag() );
-    $xml_writer->dataElement( 'VALUE', $self->value() )
-      if ( defined $self->value() );
-    $xml_writer->dataElement( 'UNITS', $self->units() )
-      if ( defined $self->units() );
+    if ( defined $self->label() ) {
+        $attrs{label} = $self->label();
+    }
 
-    $xml_writer->endTag($tag_name);
-
+    $xml_writer->dataElement( $tag_name, $self->name(), %attrs );
 }
 
 __PACKAGE__->meta->make_immutable;

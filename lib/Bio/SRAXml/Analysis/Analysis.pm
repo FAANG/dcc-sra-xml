@@ -11,22 +11,22 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-package Bio::SRAXml::Analysis;
+package Bio::SRAXml::Analysis::Analysis;
 use strict;
 use namespace::autoclean;
 use Moose;
 
 use MooseX::Types::DateTime qw( DateTime );
-use Bio::SRAXml::EntityRef;
+use Bio::SRAXml::Common::EntityRef;
 use Bio::SRAXml::File;
-use Bio::SRAXml::UrlLink;
-use Bio::SRAXml::EntrezLink;
-use Bio::SRAXml::XrefLink;
-use Bio::SRAXml::Attribute;
-use Bio::SRAXml::AnalysisType::ReferenceAlignment;
-use Bio::SRAXml::AnalysisType::SequenceAssembly;
-use Bio::SRAXml::AnalysisType::SequenceVariation;
-use Bio::SRAXml::AnalysisType::SimpleAnalysisType;
+use Bio::SRAXml::Common::UrlLink;
+use Bio::SRAXml::Common::EntrezLink;
+use Bio::SRAXml::Common::XrefLink;
+use Bio::SRAXml::Common::Attribute;
+use Bio::SRAXml::Analysis::ReferenceAlignment;
+use Bio::SRAXml::Analysis::SequenceAssembly;
+use Bio::SRAXml::Analysis::SequenceVariation;
+use Bio::SRAXml::Analysis::SimpleAnalysisType;
 
 use Bio::SRAXml::Types;
 
@@ -53,7 +53,7 @@ has 'analysis_type' => (
 has 'study_refs' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::EntityRefArrayRef',
+    isa     => 'Bio::SRAXml::Common::EntityRefArrayRef',
     coerce  => 1,
     default => sub { [] },
     handles => {
@@ -65,7 +65,7 @@ has 'study_refs' => (
 has 'sample_refs' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::EntityRefArrayRef',
+    isa     => 'Bio::SRAXml::Common::EntityRefArrayRef',
     coerce  => 1,
     default => sub { [] },
     handles => {
@@ -77,7 +77,7 @@ has 'sample_refs' => (
 has 'experiment_refs' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::EntityRefArrayRef',
+    isa     => 'Bio::SRAXml::Common::EntityRefArrayRef',
     coerce  => 1,
     default => sub { [] },
     handles => {
@@ -89,7 +89,7 @@ has 'experiment_refs' => (
 has 'run_refs' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::EntityRefArrayRef',
+    isa     => 'Bio::SRAXml::Common::EntityRefArrayRef',
     coerce  => 1,
     default => sub { [] },
     handles => {
@@ -101,7 +101,7 @@ has 'run_refs' => (
 has 'analysis_ref' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::EntityRefArrayRef',
+    isa     => 'Bio::SRAXml::Common::EntityRefArrayRef',
     coerce  => 1,
     default => sub { [] },
     handles => {
@@ -126,7 +126,7 @@ has 'links' => (
 has 'attributes' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::AttributeArrayRef',
+    isa     => 'Bio::SRAXml::Common::AttributeArrayRef',
     default => sub { [] },
     handles => {
         add_attribute    => 'push',

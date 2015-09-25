@@ -11,13 +11,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-package Bio::SRAXml::ReferenceAssemblyType;
+package Bio::SRAXml::Common::ReferenceAssemblyType;
 
 use strict;
 use namespace::autoclean;
 use Moose;
 use Bio::SRAXml::Types;
-use Bio::SRAXml::UrlLink;
+use Bio::SRAXml::Common::UrlLink;
 
 =head1 Description
   
@@ -35,7 +35,7 @@ has 'refname'   => ( is => 'rw', isa => 'Str' );
 has 'accession' => ( is => 'rw', isa => 'Str' );
 
 has 'description' => ( is => 'rw', isa => 'Str' );
-has 'url_link' => ( is => 'rw', isa => 'Bio::SRAXml::UrlLink', coerce => 1 );
+has 'url_link' => ( is => 'rw', isa => 'Bio::SRAXml::Common::UrlLink', coerce => 1 );
 
 sub write_to_xml {
     my ( $self, $xml_writer ) = @_;

@@ -11,56 +11,34 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-package Bio::SRAXml::ReferenceSequenceType;
+package Bio::SRAXml::Common::Sequence;
 
 use strict;
-use Moose;
 use namespace::autoclean;
+use Moose;
 use Bio::SRAXml::Types;
-use Bio::SRAXml::ReferenceAssemblyType;
-use Bio::SRAXml::Sequence;
 
 with 'Bio::SRAXml::Roles::ToXML';
 
 =head1 Description
   
-  Class for representing a set of reference sequences in an assembly.
+  Class for representing a reference sequence.
   
 =cut
 
-has 'assembly' => (
-    is       => 'rw',
-    isa      => 'Bio::SRAXml::ReferenceAssemblyType',
-    required => 1,
-    coerce   => 1
-);
-
-has 'sequences' => (
-    traits  => ['Array'],
-    is      => 'rw',
-    isa     => 'Bio::SRAXml::SequenceArrayRef',
-    default => sub { [] },
-    coerce  => 1,
-    handles => {
-        add_sequence    => 'push',
-        all_sequences   => 'elements',
-        count_sequences => 'count',
-    }
-);
+has [ 'refname', 'label' ] => ( is => 'rw', isa => 'Str' );
+has 'accession' => ( is => 'rw', isa => 'Str', required => 1 );
 
 sub write_to_xml {
     my ( $self, $xml_writer ) = @_;
 
-    $xml_writer->startTag("ASSEMBLY");
-    $self->assembly->write_to_xml($xml_writer);
-    $xml_writer->endTag("ASSEMBLY");
+    my @attr = ( accession => $self->accession );
 
-    for my $seq ( $self->all_sequences ) {
-        $seq->write_to_xml($xml_writer);
-    }
+    push @attr, (refname => $self->refname) if ($self->refname);
+    push @attr, (label => $self->label) if ($self->label);
 
+    $xml_writer->emptyTag( "SEQUENCE", @attr );
 }
 
 __PACKAGE__->meta->make_immutable;
 1;
-

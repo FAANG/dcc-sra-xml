@@ -22,11 +22,11 @@ use Moose::Role;
   
 =cut
 
-has 'primary_id' => ( is => 'rw', isa => 'Bio::SRAXml::NameType', coerce => 1 );
+has 'primary_id' => ( is => 'rw', isa => 'Bio::SRAXml::Common::NameType', coerce => 1 );
 has 'secondary_id' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::NameTypeArrayRef',
+    isa     => 'Bio::SRAXml::Common::NameTypeArrayRef',
     default => sub { [] },
     coerce  => 1,
     handles => {
@@ -39,7 +39,7 @@ has 'secondary_id' => (
 has 'external_id' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::QualifiedNameTypeArrayRef',
+    isa     => 'Bio::SRAXml::Common::QualifiedNameTypeArrayRef',
     coerce  => 1,
     default => sub { [] },
     handles => {
@@ -51,7 +51,7 @@ has 'external_id' => (
 has 'submitter_id' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::QualifiedNameTypeArrayRef',
+    isa     => 'Bio::SRAXml::Common::QualifiedNameTypeArrayRef',
     coerce  => 1,
     default => sub { [] },
     handles => {
@@ -63,7 +63,7 @@ has 'submitter_id' => (
 has 'uuid' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::NameTypeArrayRef',
+    isa     => 'Bio::SRAXml::Common::NameTypeArrayRef',
     default => sub { [] },
     coerce  => 1,
     handles => {

@@ -9,7 +9,7 @@ use TestHelper;
 use Bio::SRAXml qw(write_xml_file);
 use Test::XML;
 
-my $analysis_set = Bio::SRAXml::AnalysisSet->new();
+my $analysis_set = Bio::SRAXml::Analysis::AnalysisSet->new();
 
 $analysis_set->add_analysis(
     {

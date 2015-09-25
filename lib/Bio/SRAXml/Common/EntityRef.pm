@@ -11,33 +11,31 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-package Bio::SRAXml::QualifiedNameType;
+package Bio::SRAXml::Common::EntityRef;
 use strict;
 use namespace::autoclean;
 use Moose;
 use Bio::SRAXml::Types;
 
-extends 'Bio::SRAXml::NameType';
 =head1 Description
   
-  Class for representing a single identifier with a namespace (see QualifiedNameType in SRA.common.xsd)
+  Class for referring to other archived entities. e.g. the SAMPLE_REF and 
+  EXPERIMENT_REF elements in Analysis.
   
 =cut
 
-has 'namespace' => ( is => 'rw', isa => 'Str' );
+with 'Bio::SRAXml::Roles::Identifier', 'Bio::SRAXml::Roles::RefNameGroup',
+  'Bio::SRAXml::Roles::ToXMLwithTagName';
 
 sub write_to_xml {
     my ( $self, $xml_writer, $tag_name ) = @_;
 
-    my %attrs;
+    my %attr_hash = $self->refname_group_as_hash();
 
-    $attrs{namespace} = $self->namespace();
+    $xml_writer->startTag( $tag_name, %attr_hash );
+    $self->write_identifiers_xml($xml_writer);
+    $xml_writer->endTag($tag_name);
 
-    if ( defined $self->label() ) {
-        $attrs{label} = $self->label();
-    }
-
-    $xml_writer->dataElement( $tag_name, $self->name(), %attrs );
 }
 
 __PACKAGE__->meta->make_immutable;

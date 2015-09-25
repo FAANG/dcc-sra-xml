@@ -11,7 +11,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-package Bio::SRAXml::AnalysisType::SequenceVariation;
+package Bio::SRAXml::Analysis::SequenceVariation;
 
 use strict;
 use namespace::autoclean;
@@ -19,7 +19,7 @@ use Moose;
 use Bio::SRAXml::Types;
 
 with 'Bio::SRAXml::Roles::AnalysisType';
-extends 'Bio::SRAXml::ReferenceSequenceType';
+extends 'Bio::SRAXml::Common::ReferenceSequenceType';
 
 has 'experiment_type' => (
     traits => ['Array'],

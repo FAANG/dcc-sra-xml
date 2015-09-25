@@ -11,7 +11,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-package Bio::SRAXml::EntrezLink;
+package Bio::SRAXml::Common::EntrezLink;
 use strict;
 use namespace::autoclean;
 use Moose;

@@ -11,33 +11,39 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-
-package Bio::SRAXml::UrlLink;
+package Bio::SRAXml::Common::XrefLink;
 use strict;
 use namespace::autoclean;
 use Moose;
 use Bio::SRAXml::Types;
-use MooseX::Types::URI qw(Uri);
-with 'Bio::SRAXml::Roles::Link', 'Bio::SRAXml::Roles::ToXML';
+
+with 'Bio::SRAXml::Roles::Link';
 
 =head1 Description
   
-  Class for representing a URL with a label
+  Class for representing a cross reference. Use should follow the 
+  INSDC controlled vocabulary of permitted cross references.
+
+  See http://www.insdc.org/db_xref.html for details.
   
 =cut
 
-has 'label' => ( is => 'rw', isa => 'Str', required => 1 );
-has 'url' => ( is => 'rw', isa => Uri, coerce => 1, required => 1 );
+has 'db'    => ( is => 'rw', isa => 'Str' );
+has 'id'    => ( is => 'rw', isa => 'Int' );
+has 'label' => ( is => 'rw', isa => 'Str' );
 
 sub write_to_xml {
-    my ( $self, $xml_writer ) = @_;
+    my ( $self, $write_to_xml ) = @_;
 
-    $xml_writer->startTag("URL_LINK");
+    $write_to_xml->startTag("XREF_LINK");
 
-    $xml_writer->dataElement( "LABEL", $self->label() );
-    $xml_writer->dataElement( "URL",   $self->url()->as_string );
+    $write_to_xml->dataElement( "DB",    $self->db() );
+    $write_to_xml->dataElement( "ID",    $self->id() );
+    $write_to_xml->dataElement( "LABEL", $self->label() )
+      if ( defined $self->label() );
 
-    $xml_writer->endTag("URL_LINK");
+    $write_to_xml->endTag("XREF_LINK");
+
 }
 
 __PACKAGE__->meta->make_immutable;

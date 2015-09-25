@@ -11,31 +11,20 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-package Bio::SRAXml::EntityRef;
+package Bio::SRAXml::Analysis::SimpleAnalysisType;
 use strict;
 use namespace::autoclean;
 use Moose;
 use Bio::SRAXml::Types;
 
-=head1 Description
-  
-  Class for referring to other archived entities. e.g. the SAMPLE_REF and 
-  EXPERIMENT_REF elements in Analysis.
-  
-=cut
+with 'Bio::SRAXml::Roles::AnalysisType';
 
-with 'Bio::SRAXml::Roles::Identifier', 'Bio::SRAXml::Roles::RefNameGroup',
-  'Bio::SRAXml::Roles::ToXMLwithTagName';
+has 'type' => ( is => 'rw', isa => 'Bio::SRAXml::SimpleAnalysisTypeEnum', required => 1 );
 
 sub write_to_xml {
-    my ( $self, $xml_writer, $tag_name ) = @_;
+    my ( $self, $write_to_xml ) = @_;
 
-    my %attr_hash = $self->refname_group_as_hash();
-
-    $xml_writer->startTag( $tag_name, %attr_hash );
-    $self->write_identifiers_xml($xml_writer);
-    $xml_writer->endTag($tag_name);
-
+    $write_to_xml->emptyTag( uc( $self->type() ) );
 }
 
 __PACKAGE__->meta->make_immutable;

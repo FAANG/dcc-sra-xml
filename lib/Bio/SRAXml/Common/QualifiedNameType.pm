@@ -11,44 +11,33 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-package Bio::SRAXml::AnalysisSet;
+package Bio::SRAXml::Common::QualifiedNameType;
 use strict;
 use namespace::autoclean;
 use Moose;
 use Bio::SRAXml::Types;
-use Bio::SRAXml::Analysis;
 
+extends 'Bio::SRAXml::Common::NameType';
 =head1 Description
   
-  Container element for analysis elements
+  Class for representing a single identifier with a namespace (see QualifiedNameType in SRA.common.xsd)
   
 =cut
 
-with 'Bio::SRAXml::Roles::ToXML','Bio::SRAXml::Roles::WriteableEntity';
-
-has 'analysis' => (
-    traits  => ['Array'],
-    is      => 'rw',
-    isa     => 'Bio::SRAXml::AnalysisArrayRef',
-    default => sub { [] },
-    coerce  => 1,
-    handles => {
-        add_analysis   => 'push',
-        all_analysis   => 'elements',
-        count_analysis => 'count',
-    }
-);
+has 'namespace' => ( is => 'rw', isa => 'Str' );
 
 sub write_to_xml {
-    my ( $self, $xml_writer ) = @_;
+    my ( $self, $xml_writer, $tag_name ) = @_;
 
-    $xml_writer->startTag("ANALYSIS_SET");
+    my %attrs;
 
-    for ( $self->all_analysis ) {
-        $_->write_to_xml($xml_writer);
+    $attrs{namespace} = $self->namespace();
+
+    if ( defined $self->label() ) {
+        $attrs{label} = $self->label();
     }
 
-    $xml_writer->endTag("ANALYSIS_SET");
+    $xml_writer->dataElement( $tag_name, $self->name(), %attrs );
 }
 
 __PACKAGE__->meta->make_immutable;

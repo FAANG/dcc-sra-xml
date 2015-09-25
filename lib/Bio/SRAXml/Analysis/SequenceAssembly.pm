@@ -11,7 +11,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-package Bio::SRAXml::AnalysisType::SequenceAssembly;
+package Bio::SRAXml::Analysis::SequenceAssembly;
 
 use strict;
 use namespace::autoclean;

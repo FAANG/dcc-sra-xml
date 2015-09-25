@@ -11,20 +11,33 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-package Bio::SRAXml::AnalysisType::SimpleAnalysisType;
+
+package Bio::SRAXml::Common::UrlLink;
 use strict;
 use namespace::autoclean;
 use Moose;
 use Bio::SRAXml::Types;
+use MooseX::Types::URI qw(Uri);
+with 'Bio::SRAXml::Roles::Link', 'Bio::SRAXml::Roles::ToXML';
 
-with 'Bio::SRAXml::Roles::AnalysisType';
+=head1 Description
+  
+  Class for representing a URL with a label
+  
+=cut
 
-has 'type' => ( is => 'rw', isa => 'Bio::SRAXml::SimpleAnalysisTypeEnum', required => 1 );
+has 'label' => ( is => 'rw', isa => 'Str', required => 1 );
+has 'url' => ( is => 'rw', isa => Uri, coerce => 1, required => 1 );
 
 sub write_to_xml {
-    my ( $self, $write_to_xml ) = @_;
+    my ( $self, $xml_writer ) = @_;
 
-    $write_to_xml->emptyTag( uc( $self->type() ) );
+    $xml_writer->startTag("URL_LINK");
+
+    $xml_writer->dataElement( "LABEL", $self->label() );
+    $xml_writer->dataElement( "URL",   $self->url()->as_string );
+
+    $xml_writer->endTag("URL_LINK");
 }
 
 __PACKAGE__->meta->make_immutable;

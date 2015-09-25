@@ -11,7 +11,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-package Bio::SRAXml::AnalysisType::ReferenceAlignment;
+package Bio::SRAXml::Analysis::ReferenceAlignment;
 
 use strict;
 use Moose;
@@ -20,7 +20,7 @@ use Bio::SRAXml::Types;
 
 with 'Bio::SRAXml::Roles::AnalysisType';
 
-extends 'Bio::SRAXml::ReferenceSequenceType';
+extends 'Bio::SRAXml::Common::ReferenceSequenceType';
 
 sub write_to_xml {
     my ( $self, $xml_writer ) = @_;

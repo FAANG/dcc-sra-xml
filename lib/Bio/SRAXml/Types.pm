@@ -82,58 +82,58 @@ enum FileTypeEnum => [
       )
 ];
 
-class_type 'Bio::SRAXml::Analysis';
-class_type 'Bio::SRAXml::AnalysisSet';
-class_type 'Bio::SRAXml::AnalysisType::ReferenceAlignment';
-class_type 'Bio::SRAXml::AnalysisType::SequenceAssembly';
-class_type 'Bio::SRAXml::AnalysisType::SequenceVariation';
-class_type 'Bio::SRAXml::AnalysisType::SimpleAnalysisType';
-class_type 'Bio::SRAXml::Attribute';
-class_type 'Bio::SRAXml::EntityRef';
-class_type 'Bio::SRAXml::EntrezLink';
+class_type 'Bio::SRAXml::Analysis::Analysis';
+class_type 'Bio::SRAXml::Analysis::AnalysisSet';
+class_type 'Bio::SRAXml::Analysis::ReferenceAlignment';
+class_type 'Bio::SRAXml::Analysis::SequenceAssembly';
+class_type 'Bio::SRAXml::Analysis::SequenceVariation';
+class_type 'Bio::SRAXml::Analysis::SimpleAnalysisType';
+class_type 'Bio::SRAXml::Common::Attribute';
+class_type 'Bio::SRAXml::Common::EntityRef';
+class_type 'Bio::SRAXml::Common::EntrezLink';
 class_type 'Bio::SRAXml::File';
-class_type 'Bio::SRAXml::NameType';
-class_type 'Bio::SRAXml::QualifiedNameType';
-class_type 'Bio::SRAXml::ReferenceAssemblyType';
-class_type 'Bio::SRAXml::ReferenceSequenceType';
-class_type 'Bio::SRAXml::Sequence';
-class_type 'Bio::SRAXml::UrlLink';
-class_type 'Bio::SRAXml::XrefLink';
+class_type 'Bio::SRAXml::Common::NameType';
+class_type 'Bio::SRAXml::Common::QualifiedNameType';
+class_type 'Bio::SRAXml::Common::ReferenceAssemblyType';
+class_type 'Bio::SRAXml::Common::ReferenceSequenceType';
+class_type 'Bio::SRAXml::Common::Sequence';
+class_type 'Bio::SRAXml::Common::UrlLink';
+class_type 'Bio::SRAXml::Common::XrefLink';
 
-coerce 'Bio::SRAXml::Analysis' => from 'HashRef' =>
-  via { Bio::SRAXml::Analysis->new($_); };
-coerce 'Bio::SRAXml::AnalysisSet' => from 'HashRef' =>
-  via { Bio::SRAXml::AnalysisSet->new($_); };
-coerce 'Bio::SRAXml::AnalysisType::ReferenceAlignment' => from 'HashRef' =>
-  via { Bio::SRAXml::AnalysisType::ReferenceAlignment->new($_); };
-coerce 'Bio::SRAXml::AnalysisType::SequenceAssembly' => from 'HashRef' =>
-  via { Bio::SRAXml::AnalysisType::SequenceAssembly->new($_); };
-coerce 'Bio::SRAXml::AnalysisType::SequenceVariation' => from 'HashRef' =>
-  via { Bio::SRAXml::AnalysisType::SequenceVariation->new($_); };
-coerce 'Bio::SRAXml::AnalysisType::SimpleAnalysisType' => from 'HashRef' =>
-  via { Bio::SRAXml::AnalysisType::SimpleAnalysisType->new($_); };
-coerce 'Bio::SRAXml::Attribute' => from 'HashRef' =>
-  via { Bio::SRAXml::Attribute->new($_); };
-coerce 'Bio::SRAXml::EntityRef' => from 'HashRef' =>
-  via { Bio::SRAXml::EntityRef->new($_); };
-coerce 'Bio::SRAXml::EntrezLink' => from 'HashRef' =>
-  via { Bio::SRAXml::EntrezLink->new($_); };
+coerce 'Bio::SRAXml::Analysis::Analysis' => from 'HashRef' =>
+  via { Bio::SRAXml::Analysis::Analysis->new($_); };
+coerce 'Bio::SRAXml::Analysis::AnalysisSet' => from 'HashRef' =>
+  via { Bio::SRAXml::Analysis::AnalysisSet->new($_); };
+coerce 'Bio::SRAXml::Analysis::ReferenceAlignment' => from 'HashRef' =>
+  via { Bio::SRAXml::Analysis::ReferenceAlignment->new($_); };
+coerce 'Bio::SRAXml::Analysis::SequenceAssembly' => from 'HashRef' =>
+  via { Bio::SRAXml::Analysis::SequenceAssembly->new($_); };
+coerce 'Bio::SRAXml::Analysis::SequenceVariation' => from 'HashRef' =>
+  via { Bio::SRAXml::Analysis::SequenceVariation->new($_); };
+coerce 'Bio::SRAXml::Analysis::SimpleAnalysisType' => from 'HashRef' =>
+  via { Bio::SRAXml::Analysis::SimpleAnalysisType->new($_); };
+coerce 'Bio::SRAXml::Common::Attribute' => from 'HashRef' =>
+  via { Bio::SRAXml::Common::Attribute->new($_); };
+coerce 'Bio::SRAXml::Common::EntityRef' => from 'HashRef' =>
+  via { Bio::SRAXml::Common::EntityRef->new($_); };
+coerce 'Bio::SRAXml::Common::EntrezLink' => from 'HashRef' =>
+  via { Bio::SRAXml::Common::EntrezLink->new($_); };
 coerce 'Bio::SRAXml::File' => from 'HashRef' =>
   via { Bio::SRAXml::File->new($_); };
-coerce 'Bio::SRAXml::NameType' => from 'HashRef' =>
-  via { Bio::SRAXml::NameType->new($_); };
-coerce 'Bio::SRAXml::QualifiedNameType' => from 'HashRef' =>
-  via { Bio::SRAXml::QualifiedNameType->new($_); };
-coerce 'Bio::SRAXml::ReferenceAssemblyType' => from 'HashRef' =>
-  via { Bio::SRAXml::ReferenceAssemblyType->new($_); };
-coerce 'Bio::SRAXml::ReferenceSequenceType' => from 'HashRef' =>
-  via { Bio::SRAXml::ReferenceSequenceType->new($_); };
-coerce 'Bio::SRAXml::Sequence' => from 'HashRef' =>
-  via { Bio::SRAXml::Sequence->new($_); };
-coerce 'Bio::SRAXml::UrlLink' => from 'HashRef' =>
-  via { Bio::SRAXml::UrlLink->new($_); };
-coerce 'Bio::SRAXml::XrefLink' => from 'HashRef' =>
-  via { Bio::SRAXml::XrefLink->new($_); };
+coerce 'Bio::SRAXml::Common::NameType' => from 'HashRef' =>
+  via { Bio::SRAXml::Common::NameType->new($_); };
+coerce 'Bio::SRAXml::Common::QualifiedNameType' => from 'HashRef' =>
+  via { Bio::SRAXml::Common::QualifiedNameType->new($_); };
+coerce 'Bio::SRAXml::Common::ReferenceAssemblyType' => from 'HashRef' =>
+  via { Bio::SRAXml::Common::ReferenceAssemblyType->new($_); };
+coerce 'Bio::SRAXml::Common::ReferenceSequenceType' => from 'HashRef' =>
+  via { Bio::SRAXml::Common::ReferenceSequenceType->new($_); };
+coerce 'Bio::SRAXml::Common::Sequence' => from 'HashRef' =>
+  via { Bio::SRAXml::Common::Sequence->new($_); };
+coerce 'Bio::SRAXml::Common::UrlLink' => from 'HashRef' =>
+  via { Bio::SRAXml::Common::UrlLink->new($_); };
+coerce 'Bio::SRAXml::Common::XrefLink' => from 'HashRef' =>
+  via { Bio::SRAXml::Common::XrefLink->new($_); };
 
 role_type 'Bio::SRAXml::Roles::AnalysisType';
 role_type 'Bio::SRAXml::Roles::Link';
@@ -152,56 +152,56 @@ coerce 'Bio::SRAXml::Roles::LinkArrayRef' => from 'HashRef' =>
 coerce 'Bio::SRAXml::Roles::LinkArrayRef' => from
   'Bio::SRAXml::Roles::LinkArrayRef' => via { [$_] };
 
-subtype 'Bio::SRAXml::EntityRefArrayRef' => as
-  'ArrayRef[Bio::SRAXml::EntityRef]';
+subtype 'Bio::SRAXml::Common::EntityRefArrayRef' => as
+  'ArrayRef[Bio::SRAXml::Common::EntityRef]';
 
-coerce 'Bio::SRAXml::EntityRefArrayRef' => from 'ArrayRef[HashRef]' => via {
-    [ map { Bio::SRAXml::EntityRef->new($_) } @$_ ];
+coerce 'Bio::SRAXml::Common::EntityRefArrayRef' => from 'ArrayRef[HashRef]' => via {
+    [ map { Bio::SRAXml::Common::EntityRef->new($_) } @$_ ];
 },
-  from 'Bio::SRAXml::EntityRef' => via {
+  from 'Bio::SRAXml::Common::EntityRef' => via {
     [$_];
   },
   from 'HashRef' => via {
-    [ Bio::SRAXml::EntityRef->new($_) ];
+    [ Bio::SRAXml::Common::EntityRef->new($_) ];
   };
 
-subtype 'Bio::SRAXml::EntityRefArrayRef' => as
-  'ArrayRef[Bio::SRAXml::EntityRef]';
+subtype 'Bio::SRAXml::Common::EntityRefArrayRef' => as
+  'ArrayRef[Bio::SRAXml::Common::EntityRef]';
 
-coerce 'Bio::SRAXml::EntityRefArrayRef' => from 'ArrayRef[HashRef]' => via {
-    [ map { Bio::SRAXml::EntityRef->new($_) } @$_ ];
+coerce 'Bio::SRAXml::Common::EntityRefArrayRef' => from 'ArrayRef[HashRef]' => via {
+    [ map { Bio::SRAXml::Common::EntityRef->new($_) } @$_ ];
 },
-  from 'Bio::SRAXml::EntityRef' => via {
+  from 'Bio::SRAXml::Common::EntityRef' => via {
     [$_];
   },
   from 'HashRef' => via {
-    [ Bio::SRAXml::EntityRef->new($_) ];
+    [ Bio::SRAXml::Common::EntityRef->new($_) ];
   };
 
-subtype 'Bio::SRAXml::NameTypeArrayRef' => as 'ArrayRef[Bio::SRAXml::NameType]';
+subtype 'Bio::SRAXml::Common::NameTypeArrayRef' => as 'ArrayRef[Bio::SRAXml::Common::NameType]';
 
-coerce 'Bio::SRAXml::NameTypeArrayRef' => from 'ArrayRef[HashRef]' => via {
-    [ map { Bio::SRAXml::NameType->new($_) } @$_ ];
+coerce 'Bio::SRAXml::Common::NameTypeArrayRef' => from 'ArrayRef[HashRef]' => via {
+    [ map { Bio::SRAXml::Common::NameType->new($_) } @$_ ];
 },
-  from 'Bio::SRAXml::NameType' => via {
+  from 'Bio::SRAXml::Common::NameType' => via {
     [$_];
   },
   from 'HashRef' => via {
-    [ Bio::SRAXml::NameType->new($_) ];
+    [ Bio::SRAXml::Common::NameType->new($_) ];
   };
 
-subtype 'Bio::SRAXml::QualifiedNameTypeArrayRef' => as
-  'ArrayRef[Bio::SRAXml::QualifiedNameType]';
+subtype 'Bio::SRAXml::Common::QualifiedNameTypeArrayRef' => as
+  'ArrayRef[Bio::SRAXml::Common::QualifiedNameType]';
 
-coerce 'Bio::SRAXml::QualifiedNameTypeArrayRef' => from 'ArrayRef[HashRef]' =>
+coerce 'Bio::SRAXml::Common::QualifiedNameTypeArrayRef' => from 'ArrayRef[HashRef]' =>
   via {
-    [ map { Bio::SRAXml::QualifiedNameType->new($_) } @$_ ];
+    [ map { Bio::SRAXml::Common::QualifiedNameType->new($_) } @$_ ];
   },
-  from 'Bio::SRAXml::QualifiedNameType' => via {
+  from 'Bio::SRAXml::Common::QualifiedNameType' => via {
     [$_];
   },
   from 'HashRef' => via {
-    [ Bio::SRAXml::QualifiedNameType->new($_) ];
+    [ Bio::SRAXml::Common::QualifiedNameType->new($_) ];
   };
 
 subtype 'Bio::SRAXml::AnalysisArrayRef' => as 'ArrayRef[Bio::SRAXml::Analysis]';
@@ -228,41 +228,41 @@ coerce 'Bio::SRAXml::FileArrayRef' => from 'ArrayRef[HashRef]' => via {
     [ Bio::SRAXml::File->new($_) ];
   };
 
-subtype 'Bio::SRAXml::AnalysisArrayRef' => as 'ArrayRef[Bio::SRAXml::Analysis]';
+subtype 'Bio::SRAXml::AnalysisArrayRef' => as 'ArrayRef[Bio::SRAXml::Analysis::Analysis]';
 
 coerce 'Bio::SRAXml::AnalysisArrayRef' => from 'ArrayRef[HashRef]' => via {
-    [ map { Bio::SRAXml::Analysis->new($_) } @$_ ];
+    [ map { Bio::SRAXml::Analysis::Analysis->new($_) } @$_ ];
 },
   from 'Bio::SRAXml::Analysis' => via {
     [$_];
   },
   from 'HashRef' => via {
-    [ Bio::SRAXml::Analysis->new($_) ];
+    [ Bio::SRAXml::Analysis::Analysis->new($_) ];
   };
 
-subtype 'Bio::SRAXml::SequenceArrayRef' => as 'ArrayRef[Bio::SRAXml::Sequence]';
+subtype 'Bio::SRAXml::SequenceArrayRef' => as 'ArrayRef[Bio::SRAXml::Common::Sequence]';
 
 coerce 'Bio::SRAXml::SequenceArrayRef' => from 'ArrayRef[HashRef]' => via {
-    [ map { Bio::SRAXml::Sequence->new($_) } @$_ ];
+    [ map { Bio::SRAXml::Common::Sequence->new($_) } @$_ ];
 },
-  from 'Bio::SRAXml::Sequence' => via {
+  from 'Bio::SRAXml::Common::Sequence' => via {
     [$_];
   },
   from 'HashRef' => via {
-    [ Bio::SRAXml::Sequence->new($_) ];
+    [ Bio::SRAXml::Common::Sequence->new($_) ];
   };
 
-subtype 'Bio::SRAXml::AttributeArrayRef' => as
-  'ArrayRef[Bio::SRAXml::Attribute]';
+subtype 'Bio::SRAXml::Common::AttributeArrayRef' => as
+  'ArrayRef[Bio::SRAXml::Common::Attribute]';
 
-coerce 'Bio::SRAXml::AttributeArrayRef' => from 'ArrayRef[HashRef]' => via {
-    [ map { Bio::SRAXml::Attribute->new($_) } @$_ ];
+coerce 'Bio::SRAXml::Common::AttributeArrayRef' => from 'ArrayRef[HashRef]' => via {
+    [ map { Bio::SRAXml::Common::Attribute->new($_) } @$_ ];
 },
-  from 'Bio::SRAXml::Attribute' => via {
+  from 'Bio::SRAXml::Common::Attribute' => via {
     [$_];
   },
   from 'HashRef' => via {
-    [ Bio::SRAXml::Attribute->new($_) ];
+    [ Bio::SRAXml::Common::Attribute->new($_) ];
   },
   ;
 
@@ -271,16 +271,16 @@ sub _link_from_hashref {
     my ($hr) = @_;
 
     if ( exists $hr->{url} ) {
-        return Bio::SRAXml::UrlLink->new(%$_);
+        return Bio::SRAXml::Common::UrlLink->new(%$_);
     }
     if ( exists $hr->{query} ) {
-        return Bio::SRAXml::EntrezLink->new(%$_);
+        return Bio::SRAXml::Common::EntrezLink->new(%$_);
     }
-    return Bio::SRAXml::XrefLink->new(%$_);
+    return Bio::SRAXml::Common::XrefLink->new(%$_);
 }
 
 coerce 'Bio::SRAXml::Roles::AnalysisType' => from 'Str' => via {
-    Bio::SRAXml::AnalysisType::SimpleAnalysisType->new( type => $_ );
+    Bio::SRAXml::Analysis::SimpleAnalysisType->new( type => $_ );
 };
 coerce 'Bio::SRAXml::Roles::AnalysisType' => from 'HashRef' => via {
     my $at   = $_;
@@ -292,13 +292,13 @@ coerce 'Bio::SRAXml::Roles::AnalysisType' => from 'HashRef' => via {
     my $v = $at->{$k};
 
     if ( $k eq 'reference_alignment' ) {
-        return Bio::SRAXml::AnalysisType::ReferenceAlignment->new(%$v);
+        return Bio::SRAXml::Analysis::ReferenceAlignment->new(%$v);
     }
     elsif ( $k eq 'sequence_assembly' ) {
-        return Bio::SRAXml::AnalysisType::SequenceAssembly->new(%$v);
+        return Bio::SRAXml::Analysis::SequenceAssembly->new(%$v);
     }
     elsif ( $k eq 'sequence_variation' ) {
-        return Bio::SRAXml::AnalysisType::SequenceVariation->new(%$v);
+        return Bio::SRAXml::Analysis::SequenceVariation->new(%$v);
     }
     else {
         confess(
