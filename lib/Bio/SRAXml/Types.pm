@@ -24,6 +24,11 @@ use Moose::Util::TypeConstraints;
   
 =cut
 
+subtype 'Bio::SRAXml::NonNegativeInt',
+      as 'Int',
+      where { $_ >= 0 },
+      message { "The number you provided, $_, is not a positive integer" };
+
 #enums
 enum 'Bio::SRAXml::SimpleAnalysisTypeEnum' => [
     qw( sequence_annotation reference_sequence sample_phenotype processed_reads )

@@ -27,7 +27,7 @@ use Bio::SRAXml::Types;
 with 'Bio::SRAXml::Roles::Link', 'Bio::SRAXml::Roles::ToXML';
 
 has 'db' => ( is => 'rw', isa => 'Str', required => 1 );
-has 'id'    => ( is => 'rw', isa => 'Int' );    #TODO change to positive int
+has 'id'    => ( is => 'rw', isa => 'Bio::SRAXml::NonNegativeInt' );
 has 'query' => ( is => 'rw', isa => 'Str' );    #TODO ID or query
 has 'label' => ( is => 'rw', isa => 'Str' );
 
