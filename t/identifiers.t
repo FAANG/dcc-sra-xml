@@ -16,6 +16,7 @@ $analysis_set->add_analysis(
         alias         => 'foo_alias',
         center_name   => 'RITA',
         broker_name   => 'SUE',
+        accession     => 'A1',
         analysis_type => 'sample_phenotype',
         title         => 'A title',
         description   => 'The description',
@@ -49,7 +50,7 @@ done_testing();
 
 __DATA__
 <ANALYSIS_SET>
-    <ANALYSIS alias="foo_alias" center_name="RITA" broker_name="SUE">
+    <ANALYSIS alias="foo_alias" center_name="RITA" broker_name="SUE" accession="A1">
         <TITLE>A title</TITLE>
         <DESCRIPTION>The description</DESCRIPTION>
         <STUDY_REF refname="my_study_alias" accession="A1">
