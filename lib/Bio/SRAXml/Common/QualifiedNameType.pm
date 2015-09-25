@@ -24,7 +24,7 @@ extends 'Bio::SRAXml::Common::NameType';
   
 =cut
 
-has 'namespace' => ( is => 'rw', isa => 'Str' );
+has 'namespace' => ( is => 'rw', isa => 'Str', required => 1 );
 
 sub write_to_xml {
     my ( $self, $xml_writer, $tag_name ) = @_;
