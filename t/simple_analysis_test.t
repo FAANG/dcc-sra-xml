@@ -65,5 +65,5 @@ my $ra = Bio::SRAXml::AnalysisType::ReferenceAlignment->new(
     ],
 );
 #print Dumper($ra);
-ok(1,'did not crash');
+pass('did not crash');
 done_testing();
