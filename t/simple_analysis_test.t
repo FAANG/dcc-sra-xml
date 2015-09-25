@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 
-#use Test::More;
+use Test::More;
 use FindBin qw($Bin);
 
 use lib "$Bin/../lib";
@@ -12,13 +12,13 @@ use Bio::SRAXml::AnalysisType::SequenceAssembly;
 use Bio::SRAXml::AnalysisType::SequenceVariation;
 use Bio::SRAXml::AnalysisType::SimpleAnalysisType;
 
-use Data::Dumper;
+#use Data::Dumper;
 
 my $sat =
   Bio::SRAXml::AnalysisType::SimpleAnalysisType->new(
     type => 'sample_phenotype' );
 
-print Dumper($sat);
+#print Dumper($sat);
 my $sa = Bio::SRAXml::AnalysisType::SequenceAssembly->new(
     name           => 'foo',
     partial        => 0,
@@ -28,7 +28,7 @@ my $sa = Bio::SRAXml::AnalysisType::SequenceAssembly->new(
     min_gap_length => 7000,
     mol_type       => 'genomic RNA'
 );
-print Dumper($sa);
+#print Dumper($sa);
 
 my $sv = Bio::SRAXml::AnalysisType::SequenceVariation->new(
     assembly => {
@@ -48,7 +48,7 @@ my $sv = Bio::SRAXml::AnalysisType::SequenceVariation->new(
     experiment_type => ['Curation','transcriptomics'],
 );
 
-print Dumper($sv);
+#print Dumper($sv);
 
 
 my $ra = Bio::SRAXml::AnalysisType::ReferenceAlignment->new(
@@ -64,4 +64,6 @@ my $ra = Bio::SRAXml::AnalysisType::ReferenceAlignment->new(
         { refname => 'chr2', label => '2', accession => 'EFGH2' }
     ],
 );
-print Dumper($ra);
+#print Dumper($ra);
+ok(1,'did not crash');
+done_testing();
