@@ -30,8 +30,14 @@ use Bio::SRAXml::AnalysisType::SimpleAnalysisType;
 
 use Bio::SRAXml::Types;
 
+=head1 Description
+  
+  Class for representing Analysis elements 
+  
+=cut
+
 with 'Bio::SRAXml::Roles::Identifier', 'Bio::SRAXml::Roles::NameGroup',
-  'Bio::SRAXml::Roles::ToXML';
+  'Bio::SRAXml::Roles::ToXML','Bio::SRAXml::Roles::WriteableEntity';
 
 has 'title'           => ( is => 'rw', isa => 'Str' );
 has 'description'     => ( is => 'rw', isa => 'Str' );

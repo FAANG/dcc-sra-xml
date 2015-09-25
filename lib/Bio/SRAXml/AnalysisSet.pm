@@ -18,7 +18,13 @@ use Moose;
 use Bio::SRAXml::Types;
 use Bio::SRAXml::Analysis;
 
-with 'Bio::SRAXml::Roles::ToXML';
+=head1 Description
+  
+  Container element for analysis elements
+  
+=cut
+
+with 'Bio::SRAXml::Roles::ToXML','Bio::SRAXml::Roles::WriteableEntity';
 
 has 'analysis' => (
     traits  => ['Array'],

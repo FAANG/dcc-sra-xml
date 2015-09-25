@@ -103,8 +103,6 @@ our $VERSION = '0.01';
    that go beyond the scope of this API. 
 =cut
 
-
-
 use strict;
 use warnings;
 use Exporter 'import';
@@ -157,7 +155,7 @@ our $SCHEMA_LOCATION = 'http://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/ENA.root.xsd';
 sub write_xml_file {
     my ( $analysis_set, $filename ) = validated_list(
         \@_,
-        analysis_set => { isa => 'Bio::SRAXml::AnalysisSet' },
+        analysis_set => { isa => 'Bio::SRAXml::Roles::WriteableEntity' },
         filename     => { isa => 'Str' }
     );
 
