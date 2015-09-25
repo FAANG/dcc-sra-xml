@@ -17,7 +17,8 @@ use strict;
 use Moose;
 use namespace::autoclean;
 use Bio::SRAXml::Types;
-use Bio::SRAXml::Common::ReferenceAssemblyType;
+use Bio::SRAXml::Common::ReferenceAssemblyCustomType;
+use Bio::SRAXml::Common::ReferenceAssemblyStandardType;
 use Bio::SRAXml::Common::Sequence;
 
 with 'Bio::SRAXml::Roles::ToXML';
@@ -30,7 +31,7 @@ with 'Bio::SRAXml::Roles::ToXML';
 
 has 'assembly' => (
     is       => 'rw',
-    isa      => 'Bio::SRAXml::Common::ReferenceAssemblyType',
+    isa      => 'Bio::SRAXml::Roles::ReferenceAssembly',
     required => 1,
     coerce   => 1
 );

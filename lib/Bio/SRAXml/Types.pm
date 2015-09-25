@@ -100,7 +100,6 @@ class_type 'Bio::SRAXml::Common::EntrezQueryLink';
 class_type 'Bio::SRAXml::Analysis::AnalysisFile';
 class_type 'Bio::SRAXml::Common::NameType';
 class_type 'Bio::SRAXml::Common::QualifiedNameType';
-class_type 'Bio::SRAXml::Common::ReferenceAssemblyType';
 class_type 'Bio::SRAXml::Common::ReferenceSequenceType';
 class_type 'Bio::SRAXml::Common::Sequence';
 class_type 'Bio::SRAXml::Common::UrlLink';
@@ -132,8 +131,6 @@ coerce 'Bio::SRAXml::Common::NameType' => from 'HashRef' =>
   via { Bio::SRAXml::Common::NameType->new($_); };
 coerce 'Bio::SRAXml::Common::QualifiedNameType' => from 'HashRef' =>
   via { Bio::SRAXml::Common::QualifiedNameType->new($_); };
-coerce 'Bio::SRAXml::Common::ReferenceAssemblyType' => from 'HashRef' =>
-  via { Bio::SRAXml::Common::ReferenceAssemblyType->new($_); };
 coerce 'Bio::SRAXml::Common::ReferenceSequenceType' => from 'HashRef' =>
   via { Bio::SRAXml::Common::ReferenceSequenceType->new($_); };
 coerce 'Bio::SRAXml::Common::Sequence' => from 'HashRef' =>
@@ -146,6 +143,18 @@ coerce 'Bio::SRAXml::Common::XrefLink' => from 'HashRef' =>
 role_type 'Bio::SRAXml::Roles::AnalysisType';
 role_type 'Bio::SRAXml::Roles::Link';
 role_type 'Bio::SRAXml::Roles::WriteableEntity';
+role_type 'Bio::SRAXml::Roles::ReferenceAssembly';
+
+coerce 'Bio::SRAXml::Roles::ReferenceAssembly' => from 'HashRef' => via {
+  my $hr = $_;
+  if (exists $hr->{url_link}){
+    return Bio::SRAXml::Common::ReferenceAssemblyCustomType->new($hr);
+  }
+  elsif (exists $hr->{accession}) {
+    return Bio::SRAXml::Common::ReferenceAssemblyStandardType->new($hr);
+  }
+};
+
 
 subtype 'Bio::SRAXml::Roles::LinkArrayRef' => as
   'ArrayRef[Bio::SRAXml::Roles::Link]';

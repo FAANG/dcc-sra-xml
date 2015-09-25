@@ -11,6 +11,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
+
 package Bio::SRAXml;
 
 =head1 NAME
@@ -122,7 +123,8 @@ use Bio::SRAXml::Common::EntrezQueryLink;
 use Bio::SRAXml::Analysis::AnalysisFile;
 use Bio::SRAXml::Common::NameType;
 use Bio::SRAXml::Common::QualifiedNameType;
-use Bio::SRAXml::Common::ReferenceAssemblyType;
+use Bio::SRAXml::Common::ReferenceAssemblyCustomType;
+use Bio::SRAXml::Common::ReferenceAssemblyStandardType;
 use Bio::SRAXml::Common::ReferenceSequenceType;
 use Bio::SRAXml::Common::Sequence;
 use Bio::SRAXml::Analysis::SimpleAnalysisType;

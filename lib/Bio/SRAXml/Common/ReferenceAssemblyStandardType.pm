@@ -11,7 +11,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-package Bio::SRAXml::Common::ReferenceAssemblyType;
+
+package Bio::SRAXml::Common::ReferenceAssemblyStandardType;
 
 use strict;
 use namespace::autoclean;
@@ -19,39 +20,25 @@ use Moose;
 use Bio::SRAXml::Types;
 use Bio::SRAXml::Common::UrlLink;
 
+with 'Bio::SRAXml::Roles::ReferenceAssembly';
+
 =head1 Description
   
-  Class for representing a reference assembly. Can either be standard (in which
-  case it needs a refname and an accession, or custom, in which case it needs a
-  url link and a description)
+  Class for representing a standard reference assembly. 
   
 =cut
-
-#TODO divide this into two types.
 
 with 'Bio::SRAXml::Roles::ToXML';
 
 has 'refname'   => ( is => 'rw', isa => 'Str' );
 has 'accession' => ( is => 'rw', isa => 'Str' );
 
-has 'description' => ( is => 'rw', isa => 'Str' );
-has 'url_link' => ( is => 'rw', isa => 'Bio::SRAXml::Common::UrlLink', coerce => 1 );
-
 sub write_to_xml {
     my ( $self, $xml_writer ) = @_;
 
-    if ( $self->accession ) {
-        my %attr = ( accession => $self->accession );
-        $attr{refname} = $self->refname if ( $self->refname );
-        $xml_writer->emptyTag( "STANDARD", %attr );
-    }
-    elsif ( $self->url_link ) {
-        $xml_writer->startTag("CUSTOM");
-        $xml_writer->dataElement( "DESCRIPTION", $self->description )
-          if ( $self->description );
-        $xml_writer->url_link->write_to_xml($xml_writer);
-        $xml_writer->endTag("CUSTOM");
-    }
+    my %attr = ( accession => $self->accession );
+    $attr{refname} = $self->refname if ( $self->refname );
+    $xml_writer->emptyTag( "STANDARD", %attr );
 
 }
 

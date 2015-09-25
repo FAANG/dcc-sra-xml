@@ -17,8 +17,13 @@ $analysis_set->add_analysis(
         analysis_type => {
             'reference_alignment' => {
                 assembly => {
-                    refname   => 'GRCh37',
-                    accession => 'GCA_000001405.1',
+                    description => 'A custom assembly',
+                    url_link    => {
+                        url =>
+'ftp://ftp.ncbi.nlm.nih.gov/genbank/genomes/Eukaryotes/vertebrates_mammals/Homo_sapiens/GRCh38/seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz',
+                        label =>
+                          'GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz'
+                    },
                 },
                 sequences => [
                     { accession => 'CM000663.1', label => '1' },
@@ -46,16 +51,14 @@ $analysis_set->add_analysis(
                     { accession => 'J01415.2',   label => 'MT' },
                     { accession => 'CM000685.1', label => 'X' },
                     { accession => 'CM000686.1', label => 'Y' },
-                  ]
+                ]
             }
         },
         title       => 'My little bam',
         description => 'BWA alignment',
         study_refs  => { refname => 'my_excellent_study', },
-        sample_refs => [
-            { refname => 'my_first_sample', },
-        ],
-        files => [
+        sample_refs => [ { refname => 'my_first_sample', }, ],
+        files       => [
             {
                 filename => 'alignment.bam',
                 filetype => 'bam',
@@ -72,7 +75,7 @@ write_xml_file( analysis_set => $analysis_set, filename => $filename );
 my $actual   = TestHelper::file_to_str( filename => $filename );
 my $expected = TestHelper::file_to_str( fh       => \*DATA );
 
-is_xml( $actual, $expected, "Analysis with sequence analysis type" );
+is_xml( $actual, $expected, "Analysis with reference alignment type" );
 done_testing();
 
 __DATA__
@@ -85,7 +88,12 @@ __DATA__
         <ANALYSIS_TYPE>
             <REFERENCE_ALIGNMENT>
                 <ASSEMBLY>
-                    <STANDARD refname="GRCh37" accession="GCA_000001405.1" />
+                    <CUSTOM>
+                    <DESCRIPTION>A custom assembly</DESCRIPTION>
+                    <URL_LINK>                    <URL>ftp://ftp.ncbi.nlm.nih.gov/genbank/genomes/Eukaryotes/vertebrates_mammals/Homo_sapiens/GRCh38/seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz</URL>
+                    <LABEL>GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz</LABEL>
+                    </URL_LINK>
+                    </CUSTOM>
                 </ASSEMBLY>
                 <SEQUENCE accession="CM000663.1" label="1" />
                 <SEQUENCE accession="CM000672.1" label="10" />
