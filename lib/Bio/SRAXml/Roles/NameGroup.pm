@@ -2,10 +2,10 @@ package Bio::SRAXml::Roles::NameGroup;
 use strict;
 use Moose::Role;
 
-has 'alias'       => ( is => 'rw', isa => 'Maybe[Str]' );
-has 'center_name' => ( is => 'rw', isa => 'Maybe[Str]' );
-has 'broker_name' => ( is => 'rw', isa => 'Maybe[Str]' );
-has 'accession'   => ( is => 'rw', isa => 'Maybe[Str]' );
+has 'alias'       => ( is => 'rw', isa => 'Str' );
+has 'center_name' => ( is => 'rw', isa => 'Str' );
+has 'broker_name' => ( is => 'rw', isa => 'Str' );
+has 'accession'   => ( is => 'rw', isa => 'Str' );
 
 sub name_group_as_hash {
   my ($self) = @_;

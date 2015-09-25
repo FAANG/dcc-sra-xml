@@ -2,9 +2,9 @@ package Bio::SRAXml::Roles::RefNameGroup;
 use strict;
 use Moose::Role;
 
-has 'refname'   => ( is => 'rw', isa => 'Maybe[Str]' );
-has 'ref_center'   => ( is => 'rw', isa => 'Maybe[Str]' );
-has 'accession'   => ( is => 'rw', isa => 'Maybe[Str]' );
+has 'refname'   => ( is => 'rw', isa => 'Str' );
+has 'ref_center'   => ( is => 'rw', isa => 'Str' );
+has 'accession'   => ( is => 'rw', isa => 'Str' );
 
 sub refname_group_as_hash {
   my ($self) = @_;
