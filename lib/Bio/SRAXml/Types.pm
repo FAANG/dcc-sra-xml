@@ -13,20 +13,23 @@ enum 'Bio::SRAXml::SimpleAnalysisTypeEnum' => [
 enum 'Bio::SRAXml::SequenceAssemblyMolTypeEnum' =>
   [ 'genomic DNA', 'genomic RNA', 'viral cRNA' ];
 
-my $exp_type_enum_constraint = enum 'Bio::SRAXml::SequenceVariationExperimentTypeEnum' => [
+my $exp_type_enum_constraint =
+  enum 'Bio::SRAXml::SequenceVariationExperimentTypeEnum' => [
     'Whole genome sequencing',
     'Exome sequencing',
     'Genotyping by array',
     'transcriptomics',
     'Curation',
-];
+  ];
 
-subtype 'Bio::SRAXml::SequenceVariationExperimentTypeEnumArrayRef' => as 'ArrayRef[Bio::SRAXml::SequenceVariationExperimentTypeEnum]';
+subtype 'Bio::SRAXml::SequenceVariationExperimentTypeEnumArrayRef' => as
+  'ArrayRef[Bio::SRAXml::SequenceVariationExperimentTypeEnum]';
 
-coerce 'Bio::SRAXml::SequenceVariationExperimentTypeEnumArrayRef' => from 'Str' => via sub {
-  $exp_type_enum_constraint->assert_valid($_);
-  [$_];
-};
+coerce 'Bio::SRAXml::SequenceVariationExperimentTypeEnumArrayRef' => from
+  'Str'                                                           => via sub {
+    $exp_type_enum_constraint->assert_valid($_);
+    [$_];
+  };
 
 enum FileTypeEnum => [
     qw(
@@ -153,6 +156,32 @@ coerce 'Bio::SRAXml::EntityRefArrayRef' => from 'ArrayRef[HashRef]' => via {
   },
   from 'HashRef' => via {
     [ Bio::SRAXml::EntityRef->new($_) ];
+  };
+
+subtype 'Bio::SRAXml::NameTypeArrayRef' => as 'ArrayRef[Bio::SRAXml::NameType]';
+
+coerce 'Bio::SRAXml::NameTypeArrayRef' => from 'ArrayRef[HashRef]' => via {
+    [ map { Bio::SRAXml::NameType->new($_) } @$_ ];
+},
+  from 'Bio::SRAXml::NameType' => via {
+    [$_];
+  },
+  from 'HashRef' => via {
+    [ Bio::SRAXml::NameType->new($_) ];
+  };
+
+subtype 'Bio::SRAXml::QualifiedNameTypeArrayRef' => as
+  'ArrayRef[Bio::SRAXml::QualifiedNameType]';
+
+coerce 'Bio::SRAXml::QualifiedNameTypeArrayRef' => from 'ArrayRef[HashRef]' =>
+  via {
+    [ map { Bio::SRAXml::QualifiedNameType->new($_) } @$_ ];
+  },
+  from 'Bio::SRAXml::QualifiedNameType' => via {
+    [$_];
+  },
+  from 'HashRef' => via {
+    [ Bio::SRAXml::QualifiedNameType->new($_) ];
   };
 
 subtype 'Bio::SRAXml::AnalysisArrayRef' => as 'ArrayRef[Bio::SRAXml::Analysis]';

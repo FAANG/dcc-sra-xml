@@ -2,37 +2,52 @@ package Bio::SRAXml::Roles::Identifier;
 use strict;
 use Moose::Role;
 
-has 'primary_id' => ( is => 'rw', isa => 'Maybe[Bio::SRAXml::NameType]' );
-
+has 'primary_id' => ( is => 'rw', isa => 'Bio::SRAXml::NameType' );
 has 'secondary_id' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'ArrayRef[Bio::SRAXml::NameType]',
+    isa     => 'Bio::SRAXml::NameTypeArrayRef',
     default => sub { [] },
-    handles =>
-      { has_secondary_ids => 'count', all_secondary_ids => 'elements', }
+    coerce  => 1,
+    handles => {
+        add_secondary_id  => 'push',
+        has_secondary_ids => 'count',
+        all_secondary_ids => 'elements',
+    }
 );
 
 has 'external_id' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'ArrayRef[Bio::SRAXml::QualifiedNameType]',
+    isa     => 'Bio::SRAXml::QualifiedNameTypeArrayRef',
+    coerce  => 1,
     default => sub { [] },
-    handles => { has_external_ids => 'count', all_external_ids => 'elements' }
+    handles => {
+        add_external_id  => 'push',
+        has_external_ids => 'count',
+        all_external_ids => 'elements'
+    }
 );
 has 'submitter_id' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'ArrayRef[Bio::SRAXml::QualifiedNameType]',
+    isa     => 'Bio::SRAXml::QualifiedNameTypeArrayRef',
+    coerce  => 1,
     default => sub { [] },
-    handles => { has_submitter_ids => 'count', all_submitter_ids => 'elements' }
+    handles => {
+        add_submitter_id  => 'push',
+        has_submitter_ids => 'count',
+        all_submitter_ids => 'elements'
+    }
 );
 has 'uuid' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'ArrayRef[Bio::SRAXml::NameType]',
+    isa     => 'Bio::SRAXml::NameTypeArrayRef',
     default => sub { [] },
+    coerce  => 1,
     handles => {
+        add_uuid  => 'push',
         has_uuids => 'count',
         all_uuids => 'elements'
     }
