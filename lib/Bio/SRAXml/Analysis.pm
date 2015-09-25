@@ -15,7 +15,7 @@ use Bio::SRAXml::AnalysisType::SequenceAssembly;
 use Bio::SRAXml::AnalysisType::SequenceVariation;
 use Bio::SRAXml::AnalysisType::SimpleAnalysisType;
 
-use Bio::SRAXml::Types ':all';
+use Bio::SRAXml::Types;
 
 with 'Bio::SRAXml::Roles::Identifier', 'Bio::SRAXml::Roles::NameGroup',
   'Bio::SRAXml::Roles::ToXML';
