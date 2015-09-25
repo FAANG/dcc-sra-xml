@@ -25,6 +25,8 @@ $analysis_set->add_analysis(
             accession    => 'A1',
             primary_id   => { name => 'A1' },
             secondary_id => { name => 'A-A1', },
+            external_id  => { namespace => 'SUE', name => 'EXT-A-A1' },
+            uuid         => { name      => '348923usdfgk0934-234oij' },
             submitter_id => { namespace => 'BOB', name => 'SGVP' }
         },
         files => [
@@ -57,7 +59,9 @@ __DATA__
           <IDENTIFIERS>
              <PRIMARY_ID>A1</PRIMARY_ID>
              <SECONDARY_ID>A-A1</SECONDARY_ID>
+             <EXTERNAL_ID namespace="SUE">EXT-A-A1</EXTERNAL_ID>
              <SUBMITTER_ID namespace="BOB">SGVP</SUBMITTER_ID>
+             <UUID>348923usdfgk0934-234oij</UUID>
           </IDENTIFIERS>
         </STUDY_REF>
         <ANALYSIS_TYPE>
