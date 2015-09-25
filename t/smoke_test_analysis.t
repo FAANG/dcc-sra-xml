@@ -5,7 +5,7 @@ use FindBin qw($Bin);
 use File::Temp qw/ tempfile /;
 use lib "$Bin/../lib";
 
-use Bio::SRAXml qw(write_analysis_xml_file);
+use Bio::SRAXml qw(write_xml_file);
 
 my $analysis_set = Bio::SRAXml::AnalysisSet->new();
 
@@ -66,7 +66,7 @@ $analysis_set->add_analysis(
 
 my ( $fh, $filename ) = tempfile();
 
-write_analysis_xml_file( analysis_set => $analysis_set, filename => $filename );
+write_xml_file( analysis_set => $analysis_set, filename => $filename );
 
 open( $fh, '<', $filename );
 
