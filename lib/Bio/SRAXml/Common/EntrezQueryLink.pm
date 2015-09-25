@@ -11,38 +11,38 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 =cut
-package Bio::SRAXml::Common::XrefLink;
+
+package Bio::SRAXml::Common::EntrezQueryLink;
 use strict;
 use namespace::autoclean;
 use Moose;
 use Bio::SRAXml::Types;
 
-with 'Bio::SRAXml::Roles::Link';
-
 =head1 Description
   
-  Class for representing a cross reference. Use should follow the 
-  INSDC controlled vocabulary of permitted cross references.
-
-  See http://www.insdc.org/db_xref.html for details.
+  Class for modelling links to Entrez. db is required, 
+  as is either id or query (mutually exclusive). 
   
 =cut
 
+with 'Bio::SRAXml::Roles::Link', 'Bio::SRAXml::Roles::ToXML';
+
 has 'db'    => ( is => 'rw', isa => 'Str', required => 1 );
-has 'id'    => ( is => 'rw', isa => 'Str', required => 1 );
+has 'entrez_query' => ( is => 'rw', isa => 'Str', required => 1 );
 has 'label' => ( is => 'rw', isa => 'Str' );
 
 sub write_to_xml {
-    my ( $self, $write_to_xml ) = @_;
+    my ( $self, $xml_writer ) = @_;
 
-    $write_to_xml->startTag("XREF_LINK");
+    $xml_writer->startTag("ENTREZ_LINK");
 
-    $write_to_xml->dataElement( "DB",    $self->db() );
-    $write_to_xml->dataElement( "ID",    $self->id() );
-    $write_to_xml->dataElement( "LABEL", $self->label() )
-      if ( defined $self->label() );
+    $xml_writer->dataElement( "DB", $self->db() );
 
-    $write_to_xml->endTag("XREF_LINK");
+    $xml_writer->dataElement( "QUERY", $self->entrez_query() );
+
+    $xml_writer->dataElement( "LABEL", $self->label() ) if ( $self->label() );
+
+    $xml_writer->endTag("ENTREZ_LINK");
 
 }
 

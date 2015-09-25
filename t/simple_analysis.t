@@ -3,7 +3,7 @@ use strict;
 use Test::More;
 use FindBin qw($Bin);
 use File::Temp qw/ tempfile /;
-use lib ("$Bin/../lib","$Bin/lib");
+use lib ( "$Bin/../lib", "$Bin/lib" );
 
 use TestHelper;
 use Bio::SRAXml qw(write_xml_file);
@@ -42,9 +42,13 @@ $analysis_set->add_analysis(
                 label => 'url link'
             },
             {
-                db    => 'foo',
-                query => 'bar',
-                id    => 7,
+                db => 'foo',
+                entrez_id => 7,
+                label     => 'entrez link',
+            },
+            {
+                db           => 'foo',
+                entrez_query => 'bar',
                 label => 'entrez link',
             },
             {
@@ -70,8 +74,8 @@ my ( $fh, $filename ) = tempfile();
 
 write_xml_file( analysis_set => $analysis_set, filename => $filename );
 
-my $actual = TestHelper::file_to_str(filename => $filename);
-my $expected = TestHelper::file_to_str(fh => \*DATA);
+my $actual   = TestHelper::file_to_str( filename => $filename );
+my $expected = TestHelper::file_to_str( fh       => \*DATA );
 
 is_xml( $actual, $expected, "Analysis with simple analysis type" );
 done_testing();
@@ -103,6 +107,13 @@ __DATA__
                 <ENTREZ_LINK>
                     <DB>foo</DB>
                     <ID>7</ID>
+                    <LABEL>entrez link</LABEL>
+                </ENTREZ_LINK>
+            </ANALYSIS_LINK>
+            <ANALYSIS_LINK>
+                <ENTREZ_LINK>
+                    <DB>foo</DB>
+                    <QUERY>bar</QUERY>
                     <LABEL>entrez link</LABEL>
                 </ENTREZ_LINK>
             </ANALYSIS_LINK>
