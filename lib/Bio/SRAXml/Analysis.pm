@@ -24,7 +24,12 @@ has 'title'           => ( is => 'rw', isa => 'Str' );
 has 'description'     => ( is => 'rw', isa => 'Str' );
 has 'analysis_center' => ( is => 'rw', isa => 'Str' );
 has 'analysis_date'   => ( is => 'rw', isa => 'DateTime', coerce => 1 );
-has 'analysis_type'   => ( is => 'rw', isa => 'Bio::SRAXml::Roles::AnalysisType', required => 1, coerce => 1);
+has 'analysis_type' => (
+    is       => 'rw',
+    isa      => 'Bio::SRAXml::Roles::AnalysisType',
+    required => 1,
+    coerce   => 1
+);
 
 has 'study_refs' => (
     traits  => ['Array'],
@@ -166,10 +171,22 @@ sub write_to_xml {
         $_->write_to_xml( $xml_writer, 'ANALYSIS_REF' );
     }
 
+    $self->analysis_type()->write_to_xml($xml_writer);
+
+    if ( $self->has_files() ) {
+        $xml_writer->startTag("FILES");
+        for ( $self->all_files ) {
+            $_->write_to_xml($xml_writer);
+        }
+        $xml_writer->endTag("FILES");
+    }
+
     if ( $self->count_links() ) {
         $xml_writer->startTag("ANALYSIS_LINKS");
         for ( $self->all_links ) {
+            $xml_writer->startTag("ANALYSIS_LINK");
             $_->write_to_xml($xml_writer);
+            $xml_writer->endTag("ANALYSIS_LINK");
         }
         $xml_writer->endTag("ANALYSIS_LINKS");
     }
@@ -180,16 +197,6 @@ sub write_to_xml {
             $_->write_to_xml( $xml_writer, 'ANALYSIS_ATTRIBUTE' );
         }
         $xml_writer->endTag("ANALYSIS_ATTRIBUTES");
-    }
-
-    $self->analysis_type()->write_to_xml($xml_writer);
-
-    if ( $self->has_files() ) {
-        $xml_writer->startTag("FILES");
-        for ( $self->all_files ) {
-            $_->write_to_xml($xml_writer);
-        }
-        $xml_writer->endTag("FILES");
     }
 
     $xml_writer->endTag("ANALYSIS");

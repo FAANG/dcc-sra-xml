@@ -5,14 +5,9 @@ use FindBin qw($Bin);
 use File::Temp qw/ tempfile /;
 use lib "$Bin/../lib";
 
-use Bio::SRAXml qw(write_analysis_xml);
-use Bio::SRAXml::AnalysisType::SimpleAnalysisType;
-use XML::Writer;
-use Bio::SRAXml::Types ;
-
+use Bio::SRAXml qw(write_analysis_xml_file);
 
 my $analysis_set = Bio::SRAXml::AnalysisSet->new();
-
 
 $analysis_set->add_analysis(
     {
@@ -26,7 +21,7 @@ $analysis_set->add_analysis(
             minute => 8,
             second => 9,
         },
-        analysis_type =>  'sample_phenotype',
+        analysis_type => 'sample_phenotype',
         title         => 'A title',
         description   => 'The description',
         study_refs    => { refname => 'my_study_alias', },
@@ -35,9 +30,9 @@ $analysis_set->add_analysis(
             label   => 'bob',
         },
         attributes => [
-            {tag => 'attr1',value => 'val1'},
-            {tag => 'attr2',value => 'val2'},
-            {tag => 'attr3',value => '4', units => 'kg'},
+            { tag => 'attr1', value => 'val1' },
+            { tag => 'attr2', value => 'val2' },
+            { tag => 'attr3', value => '4', units => 'kg' },
         ],
         links => [
             {
@@ -71,9 +66,8 @@ $analysis_set->add_analysis(
 
 my ( $fh, $filename ) = tempfile();
 
-write_analysis_xml( $analysis_set, $fh );
+write_analysis_xml_file( analysis_set => $analysis_set, filename => $filename );
 
-close($fh);
 open( $fh, '<', $filename );
 
 my ( @expected, @actual );
@@ -102,22 +96,33 @@ __DATA__
         <EXPERIMENT_REF refname="my_experiment_alias"></EXPERIMENT_REF>
         <RUN_REF refname="run1"></RUN_REF>
         <RUN_REF refname="run2"></RUN_REF>
+        <ANALYSIS_TYPE>
+            <SAMPLE_PHENOTYPE />
+        </ANALYSIS_TYPE>
+        <FILES>
+            <FILE checksum="abcdefg" filetype="bam" filename="afile.bam" checksum_method="MD5" />
+        </FILES>
         <ANALYSIS_LINKS>
-            <URL_LINK>
-                <LABEL>url link</LABEL>
-                <URL>http://something.com</URL>
-            </URL_LINK>
-            <ENTREZ_LINK>
-                <DB>foo</DB>
-                <ID>7</ID>
-                <QUERY>bar</QUERY>
-                <LABEL>entrez link</LABEL>
-            </ENTREZ_LINK>
-            <XREF_LINK>
-                <DB>canute</DB>
-                <ID>107</ID>
-                <LABEL>xref link</LABEL>
-            </XREF_LINK>
+            <ANALYSIS_LINK>
+                <URL_LINK>
+                    <LABEL>url link</LABEL>
+                    <URL>http://something.com</URL>
+                </URL_LINK>
+            </ANALYSIS_LINK>
+            <ANALYSIS_LINK>
+                <ENTREZ_LINK>
+                    <DB>foo</DB>
+                    <ID>7</ID>
+                    <LABEL>entrez link</LABEL>
+                </ENTREZ_LINK>
+            </ANALYSIS_LINK>
+            <ANALYSIS_LINK>
+                <XREF_LINK>
+                    <DB>canute</DB>
+                    <ID>107</ID>
+                    <LABEL>xref link</LABEL>
+                </XREF_LINK>
+            </ANALYSIS_LINK>
         </ANALYSIS_LINKS>
         <ANALYSIS_ATTRIBUTES>
             <ANALYSIS_ATTRIBUTE>
@@ -134,11 +139,5 @@ __DATA__
                 <UNITS>kg</UNITS>
             </ANALYSIS_ATTRIBUTE>
         </ANALYSIS_ATTRIBUTES>
-        <ANALYSIS_TYPE>
-            <SAMPLE_PHENOTYPE />
-        </ANALYSIS_TYPE>
-        <FILES>
-            <FILE checksum="abcdefg" filetype="bam" filename="afile.bam" checksum_method="MD5" />
-        </FILES>
     </ANALYSIS>
 </ANALYSIS_SET>
