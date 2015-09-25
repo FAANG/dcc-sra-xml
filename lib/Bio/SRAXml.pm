@@ -118,7 +118,7 @@ use Bio::SRAXml::Analysis::AnalysisSet;
 use Bio::SRAXml::Common::Attribute;
 use Bio::SRAXml::Common::EntityRef;
 use Bio::SRAXml::Common::EntrezLink;
-use Bio::SRAXml::File;
+use Bio::SRAXml::Analysis::AnalysisFile;
 use Bio::SRAXml::Common::NameType;
 use Bio::SRAXml::Common::QualifiedNameType;
 use Bio::SRAXml::Common::ReferenceAssemblyType;

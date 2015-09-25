@@ -18,7 +18,7 @@ use Moose;
 
 use MooseX::Types::DateTime qw( DateTime );
 use Bio::SRAXml::Common::EntityRef;
-use Bio::SRAXml::File;
+use Bio::SRAXml::Analysis::AnalysisFile;
 use Bio::SRAXml::Common::UrlLink;
 use Bio::SRAXml::Common::EntrezLink;
 use Bio::SRAXml::Common::XrefLink;
@@ -139,7 +139,7 @@ has 'attributes' => (
 has 'files' => (
     traits  => ['Array'],
     is      => 'rw',
-    isa     => 'Bio::SRAXml::FileArrayRef',
+    isa     => 'Bio::SRAXml::Analysis::AnalysisFileArrayRef',
     default => sub { [] },
     coerce  => 1,
     handles => {

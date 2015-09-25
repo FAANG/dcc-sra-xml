@@ -91,7 +91,7 @@ class_type 'Bio::SRAXml::Analysis::SimpleAnalysisType';
 class_type 'Bio::SRAXml::Common::Attribute';
 class_type 'Bio::SRAXml::Common::EntityRef';
 class_type 'Bio::SRAXml::Common::EntrezLink';
-class_type 'Bio::SRAXml::File';
+class_type 'Bio::SRAXml::Analysis::AnalysisFile';
 class_type 'Bio::SRAXml::Common::NameType';
 class_type 'Bio::SRAXml::Common::QualifiedNameType';
 class_type 'Bio::SRAXml::Common::ReferenceAssemblyType';
@@ -118,8 +118,8 @@ coerce 'Bio::SRAXml::Common::EntityRef' => from 'HashRef' =>
   via { Bio::SRAXml::Common::EntityRef->new($_); };
 coerce 'Bio::SRAXml::Common::EntrezLink' => from 'HashRef' =>
   via { Bio::SRAXml::Common::EntrezLink->new($_); };
-coerce 'Bio::SRAXml::File' => from 'HashRef' =>
-  via { Bio::SRAXml::File->new($_); };
+coerce 'Bio::SRAXml::Analysis::AnalysisFile' => from 'HashRef' =>
+  via { Bio::SRAXml::Analysis::AnalysisFile->new($_); };
 coerce 'Bio::SRAXml::Common::NameType' => from 'HashRef' =>
   via { Bio::SRAXml::Common::NameType->new($_); };
 coerce 'Bio::SRAXml::Common::QualifiedNameType' => from 'HashRef' =>
@@ -216,16 +216,16 @@ coerce 'Bio::SRAXml::AnalysisArrayRef' => from 'ArrayRef[HashRef]' => via {
     [ Bio::SRAXml::Analysis->new($_) ];
   };
 
-subtype 'Bio::SRAXml::FileArrayRef' => as 'ArrayRef[Bio::SRAXml::File]';
+subtype 'Bio::SRAXml::Analysis::AnalysisFileArrayRef' => as 'ArrayRef[Bio::SRAXml::Analysis::AnalysisFile]';
 
-coerce 'Bio::SRAXml::FileArrayRef' => from 'ArrayRef[HashRef]' => via {
-    [ map { Bio::SRAXml::File->new($_) } @$_ ];
+coerce 'Bio::SRAXml::Analysis::AnalysisFileArrayRef' => from 'ArrayRef[HashRef]' => via {
+    [ map { Bio::SRAXml::Analysis::AnalysisFile->new($_) } @$_ ];
 },
-  from 'Bio::SRAXml::File' => via {
+  from 'Bio::SRAXml::Analysis::AnalysisFile' => via {
     [$_];
   },
   from 'HashRef' => via {
-    [ Bio::SRAXml::File->new($_) ];
+    [ Bio::SRAXml::Analysis::AnalysisFile->new($_) ];
   };
 
 subtype 'Bio::SRAXml::AnalysisArrayRef' => as 'ArrayRef[Bio::SRAXml::Analysis::Analysis]';

@@ -12,7 +12,7 @@
    limitations under the License.
 =cut
 
-package Bio::SRAXml::File;
+package Bio::SRAXml::Analysis::AnalysisFile;
 use strict;
 use namespace::autoclean;
 use Moose;
