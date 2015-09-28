@@ -1,0 +1,51 @@
+<ANALYSIS alias="do131_Input_liver_none_mmuC57BL65_CRI01" accession="ERZ000001" center_name="European Bioinformatics Institute">
+<IDENTIFIERS>
+<PRIMARY_ID>ERZ000001</PRIMARY_ID>
+<SUBMITTER_ID namespace="EBI">do131_Input_liver_none_mmuC57BL65_CRI01</SUBMITTER_ID>
+</IDENTIFIERS>
+<BROKEN_TITLE_ELEMENT>Five-Vertebrate ChIP-seq Reveals the Evolutionary Dynamics of Transcription Factor Binding</BROKEN_TITLE_ELEMENT>
+<DESCRIPTION>Transcription factors (TFs) direct gene expression by binding to DNA regulatory            regions. To explore the evolution of gene regulation, we used chromatin immunoprecipitation            with high-throughput sequencing (ChIP-seq) to determine experimentally the genome-wide            occupancy of two TFs, CCAAT/enhancer-binding protein alpha and hepatocyte nuclear factor 4            alpha, in the livers of five vertebrates. Although each TF displays highly conserved DNA            binding preferences, most binding is species-specific, and aligned binding events present in            all five species are rare. Regions near genes with expression levels that are dependent on a            TF are often bound by the TF in multiple species yet show no enhanced DNA sequence            constraint. Binding divergence between species can be largely explained by sequence changes            to the bound motifs. Among the binding events lost in one lineage, only half are recovered            by another binding event within 10 kilobases. Our results reveal large interspecies            differences in transcriptional regulation and provide insight into regulatory            evolution.</DESCRIPTION>
+<STUDY_REF accession="ERP000054" refname="E-TABM-722" refcenter="CRUK-CRI">
+<IDENTIFIERS>
+<PRIMARY_ID>ERP000054</PRIMARY_ID>
+<SUBMITTER_ID namespace="CRUK-CRI">E-TABM-722</SUBMITTER_ID>
+</IDENTIFIERS>
+</STUDY_REF>
+<SAMPLE_REF accession="ERS000156" refname="E-TABM-722:mmu5" refcenter="CRUK-CRI">
+<IDENTIFIERS>
+<PRIMARY_ID>ERS000156</PRIMARY_ID>
+<EXTERNAL_ID namespace="BioSample">SAMEA907007</EXTERNAL_ID>
+</IDENTIFIERS>
+</SAMPLE_REF>
+<RUN_REF accession="ERR005109" refname="E-TABM-722:do131_Input_liver_none_mmuC57BL65_CRI01.srf" refcenter="CRUK-CRI"/>
+<ANALYSIS_TYPE>
+<REFERENCE_ALIGNMENT>
+<ASSEMBLY>
+<CUSTOM>
+<URL_LINK>
+<LABEL>Mus_musculus.NCBIM37.52</LABEL>
+<URL>ftp://ftp.ensembl.org/pub/release-52/fasta/mus_musculus/dna/Mus_musculus.NCBIM37.52.dna.toplevel.fa.gz</URL>
+</URL_LINK>
+</CUSTOM>
+</ASSEMBLY>
+</REFERENCE_ALIGNMENT>
+</ANALYSIS_TYPE>
+<FILES>
+<FILE filename="ERZ000/ERZ000001/do131_Input_liver_none_mmuC57BL65_CRI01.sra.sorted.bam" filetype="bam" checksum_method="MD5" checksum="15191d68bdd5c1ad23c943c3da3730c7"/>
+<FILE filename="ERZ000/ERZ000001/do131_Input_liver_none_mmuC57BL65_CRI01.sra.sorted.bam.bai" filetype="bam" checksum_method="MD5" checksum="d6adfcbca872397b5f51e1456ad41e4a"/>
+</FILES>
+<ANALYSIS_LINKS>
+<ANALYSIS_LINK>
+<XREF_LINK>
+<DB>PUBMED</DB>
+<ID>20378774</ID>
+</XREF_LINK>
+</ANALYSIS_LINK>
+<ANALYSIS_LINK>
+<XREF_LINK>
+<DB>ENA-SUBMISSION</DB>
+<ID>ERA020681</ID>
+</XREF_LINK>
+</ANALYSIS_LINK>
+</ANALYSIS_LINKS>
+</ANALYSIS>

@@ -10,4 +10,5 @@ on 'test' => sub {
 	requires "autodie", ">=2.29";
 	requires "Test::More", ">=1.00";
 	requires "Test::XML", ">=0.08";
+	requires "Test::Exception", ">=0.40";
 };
