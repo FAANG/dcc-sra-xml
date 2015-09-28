@@ -63,7 +63,6 @@ our $VERSION = '0.01';
             },
             {
                 db    => 'foo',
-                query => 'bar',
                 id    => 7,
                 label => 'entrez link',
             },
