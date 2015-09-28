@@ -70,7 +70,7 @@ $analysis_set->add_analysis(
 
 my ( $fh, $filename ) = tempfile();
 
-write_xml_file( analysis_set => $analysis_set, filename => $filename );
+write_xml_file( root_entity => $analysis_set, filename => $filename );
 
 my $actual   = TestHelper::file_to_str( filename => $filename );
 my $expected = TestHelper::file_to_str( fh       => \*DATA );

@@ -87,6 +87,24 @@ enum 'Bio::SRAXml::AnalysisFileTypeEnum' => [
       )
 ];
 
+enum 'Bio::SRAXml::DatasetTypeEnum' => [
+
+    'Whole genome sequencing',
+    'Exome sequencing',
+    'Genotyping by array',
+    'Transcriptome profiling by high-throughput sequencing',
+    'Transcriptome profiling by array',
+    'Amplicon sequencing',
+    'Methylation binding domain sequencing',
+    'Methylation profiling by high-throughput sequencing',
+    'Phenotype information',
+    'Study summary information',
+    'Genomic variant calling',
+    'Chromatin accessibility profiling by high-throughput sequencing',
+    'Histone modification profiling by high-throughput sequencing',
+
+];
+
 class_type 'Bio::SRAXml::Analysis::Analysis';
 class_type 'Bio::SRAXml::Analysis::AnalysisSet';
 class_type 'Bio::SRAXml::Analysis::ReferenceAlignment';
@@ -104,6 +122,9 @@ class_type 'Bio::SRAXml::Common::ReferenceSequenceType';
 class_type 'Bio::SRAXml::Common::Sequence';
 class_type 'Bio::SRAXml::Common::UrlLink';
 class_type 'Bio::SRAXml::Common::XrefLink';
+
+class_type 'Bio::SRAXml::Dataset::Dataset';
+class_type 'Bio::SRAXml::Dataset::Datasets';
 
 coerce 'Bio::SRAXml::Analysis::Analysis' => from 'HashRef' =>
   via { Bio::SRAXml::Analysis::Analysis->new($_); };
@@ -139,6 +160,10 @@ coerce 'Bio::SRAXml::Common::UrlLink' => from 'HashRef' =>
   via { Bio::SRAXml::Common::UrlLink->new($_); };
 coerce 'Bio::SRAXml::Common::XrefLink' => from 'HashRef' =>
   via { Bio::SRAXml::Common::XrefLink->new($_); };
+coerce 'Bio::SRAXml::Dataset::Dataset' => from 'HashRef' =>
+  via { Bio::SRAXml::Dataset::Dataset->new($_); };
+coerce 'Bio::SRAXml::Dataset::Datasets' => from 'HashRef' =>
+  via { Bio::SRAXml::Dataset::Datasets->new($_); };
 
 role_type 'Bio::SRAXml::Roles::AnalysisType';
 role_type 'Bio::SRAXml::Roles::Link';
@@ -146,15 +171,14 @@ role_type 'Bio::SRAXml::Roles::WriteableEntity';
 role_type 'Bio::SRAXml::Roles::ReferenceAssembly';
 
 coerce 'Bio::SRAXml::Roles::ReferenceAssembly' => from 'HashRef' => via {
-  my $hr = $_;
-  if (exists $hr->{url_link}){
-    return Bio::SRAXml::Common::ReferenceAssemblyCustomType->new($hr);
-  }
-  elsif (exists $hr->{accession}) {
-    return Bio::SRAXml::Common::ReferenceAssemblyStandardType->new($hr);
-  }
+    my $hr = $_;
+    if ( exists $hr->{url_link} ) {
+        return Bio::SRAXml::Common::ReferenceAssemblyCustomType->new($hr);
+    }
+    elsif ( exists $hr->{accession} ) {
+        return Bio::SRAXml::Common::ReferenceAssemblyStandardType->new($hr);
+    }
 };
-
 
 subtype 'Bio::SRAXml::Roles::LinkArrayRef' => as
   'ArrayRef[Bio::SRAXml::Roles::Link]';
@@ -291,6 +315,18 @@ coerce 'Bio::SRAXml::Common::AttributeArrayRef' => from 'ArrayRef[HashRef]' =>
     [ Bio::SRAXml::Common::Attribute->new($_) ];
   },
   ;
+
+subtype 'Bio::SRAXml::DatasetArrayRef' => as 'ArrayRef[Bio::SRAXml::Dataset::Dataset]';
+
+coerce 'Bio::SRAXml::DatasetArrayRef' => from 'ArrayRef[HashRef]' => via {
+    [ map { Bio::SRAXml::Dataset::Dataset->new($_) } @$_ ];
+},
+  from 'Bio::SRAXml::Analysis' => via {
+    [$_];
+  },
+  from 'HashRef' => via {
+    [ Bio::SRAXml::Dataset::Dataset->new($_) ];
+  };
 
 # link coercion
 sub _link_from_hashref {

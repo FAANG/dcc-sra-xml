@@ -71,7 +71,7 @@ $analysis_set->add_analysis(
     }
 );
 
-write_xml_file($analysis_set,'/path/to/file');
+write_xml_file(root_entity => $analysis_set, filename => '/path/to/file');
 ```
 
 ##Analysis types

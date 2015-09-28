@@ -20,11 +20,11 @@ Bio::SRAXml - Perlish construction of SRA XML
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
@@ -83,7 +83,7 @@ our $VERSION = '0.01';
         ],
     });
 
-    write_xml_file($analysis_set,'/path/to/file');
+    write_xml_file(root_entity => $analysis_set, filename => '/path/to/file');
 
 =head1 Description
 
@@ -135,16 +135,22 @@ use Bio::SRAXml::Analysis::SequenceAssembly;
 use Bio::SRAXml::Analysis::SequenceVariation;
 use Bio::SRAXml::Analysis::SimpleAnalysisType;
 
+use Bio::SRAXml::Dataset::Dataset;
+use Bio::SRAXml::Dataset::Datasets;
+
 our @EXPORT_OK = qw(write_xml_file);
 
-=head2 Bio::SRAXml::SCHEMA_LOCATION
+=head2 Bio::SRAXml::MAIN_SCHEMA_LOCATION
 
   Package variable set to the schema URL http://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/ENA.root.xsd
   It is unlikely you will want to change this variable in isolation 
    - the API is designed against this version of the schema
 =cut
 
-our $SCHEMA_LOCATION = 'http://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/ENA.root.xsd';
+our $MAIN_SCHEMA_LOCATION =
+  'http://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/ENA.root.xsd';
+our %SUPPLEMENTARY_SCHEMA_LOCATIONS = ( 'Bio::SRAXml::Dataset::Datasets' =>
+      'http://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/EGA.dataset.xsd', );
 
 =head2 write_xml_file
 
@@ -155,10 +161,10 @@ our $SCHEMA_LOCATION = 'http://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/ENA.root.xsd';
 =cut
 
 sub write_xml_file {
-    my ( $analysis_set, $filename ) = validated_list(
+    my ( $root_entity, $filename ) = validated_list(
         \@_,
-        analysis_set => { isa => 'Bio::SRAXml::Roles::WriteableEntity' },
-        filename     => { isa => 'Str' }
+        root_entity => { isa => 'Bio::SRAXml::Roles::WriteableEntity' },
+        filename    => { isa => 'Str' }
     );
 
     my $output = IO::File->new( '>' . $filename );
@@ -170,18 +176,33 @@ sub write_xml_file {
         DATA_MODE   => 1
     );
 
-    $analysis_set->write_to_xml($writer);
+    $root_entity->write_to_xml($writer);
 
     $writer->end();
     $output->close();
 
-    validate_against_schema( filename => $filename );
+    validate_against_schema(
+        filename         => $filename,
+        root_entity_type => ref($root_entity)
+    );
 }
 
 sub validate_against_schema {
-    my ($filename) = validated_list( \@_, filename => { isa => 'Str' }, );
+    my ( $filename, $root_entity_type ) = validated_list(
+        \@_,
+        filename         => { isa => 'Str' },
+        root_entity_type => { isa => 'Str', optional => 1 }
+    );
 
-    my $xmlschema = XML::LibXML::Schema->new( location => $SCHEMA_LOCATION );
+    my $schema = $MAIN_SCHEMA_LOCATION;
+
+    if ( $root_entity_type
+        && exists $SUPPLEMENTARY_SCHEMA_LOCATIONS{$root_entity_type} )
+    {
+        $schema = $SUPPLEMENTARY_SCHEMA_LOCATIONS{$root_entity_type};
+    }
+
+    my $xmlschema = XML::LibXML::Schema->new( location => $schema );
 
     my $doc = XML::LibXML->new->parse_file($filename);
 
