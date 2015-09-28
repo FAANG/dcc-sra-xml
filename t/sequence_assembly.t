@@ -47,7 +47,7 @@ write_xml_file( analysis_set => $analysis_set, filename => $filename );
 my $actual   = TestHelper::file_to_str( filename => $filename );
 my $expected = TestHelper::file_to_str( fh       => \*DATA );
 
-is_xml( $actual, $expected, "Analysis with sequence analysis type" );
+is_xml( $actual, $expected, "Analysis with sequence assembly type" );
 done_testing();
 
 __DATA__
