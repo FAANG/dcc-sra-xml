@@ -7,7 +7,7 @@ A library for building SRA XML.
 
 Smooth the process of writing SRA XML, producing documents that comply with the XML schema. We make no attempt to validate the content of the documents produced. The initial focus of the library is writing analysis XML.
 
-##Use
+##Example
 
 ```perl
 
@@ -80,7 +80,7 @@ Each alignment type has different requirements
 
 ###Reference alignment
 
-A reference alignment must specify which assembly was used, and which sequences it refers to.
+A reference alignment must specify which assembly was used, and which sequences it refers to. Assemblies can either be standard (refname and accession) or custom (description and url_link).
 
 ```perl
 $analysis_set->add_analysis(
@@ -132,6 +132,8 @@ $analysis_set->add_analysis(
 
 ###Sequence variation
 
+Similar to reference alignment, sequence variation requires an assembly and sequences, plus some additional attributes.
+
 ```perl
 $analysis_set->add_analysis(
     {
@@ -155,8 +157,29 @@ $analysis_set->add_analysis(
         ...
       }
 );
-
 ```
+
+###Other types
+
+The following types can be specified with a simple string:
+
+ * sequence_annotation
+ * reference_sequence
+ * sample_phenotype
+ * processed_reads
+ 
+ e.g. 
+
+```perl
+$analysis_set->add_analysis(
+    {
+        alias         => 'bar_alias',
+        analysis_type => 'reference_sequence',
+        ...
+      }
+);
+
+
 ##Contributing
 
 We would welcome contributions that extend the SRA objects covered by this library. Please organise code to support one xsd file in one directory, e.g.
@@ -169,3 +192,5 @@ The roles in `lib/Bio/SRAXml/Roles` are used for two purposes
  * tag classes (e.g. Bio::SRAXml::Roles::Link to label the Entrez, URL and XRef link classes)
  * for use as mixins for common attributes, e.g. NameGroup 
 to either tag classes as supporting some functionality, or as mixins to provide   
+
+The library makes heavy use of moose type coercions, so that you users can input data without knowing the entire class hierachy. This should be continued as the llibrary grows. See Bio::SRAXml::Types for examples.
