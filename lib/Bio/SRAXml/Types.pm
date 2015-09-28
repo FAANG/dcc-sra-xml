@@ -55,7 +55,7 @@ coerce 'Bio::SRAXml::SequenceVariationExperimentTypeEnumArrayRef' => from
     [$_];
   };
 
-enum FileTypeEnum => [
+enum 'Bio::SRAXml::AnalysisFileTypeEnum' => [
     qw(
       tab
       bam

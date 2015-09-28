@@ -27,7 +27,7 @@ use Bio::SRAXml::Types;
 with 'Bio::SRAXml::Roles::ToXML';
 
 has 'filename' => ( is => 'rw', isa => 'Str',          required => 1 );
-has 'filetype' => ( is => 'rw', isa => 'FileTypeEnum', required => 1 );
+has 'filetype' => ( is => 'rw', isa => 'Bio::SRAXml::AnalysisFileTypeEnum', required => 1 );
 has 'checksum' => ( is => 'rw', isa => 'Str',          required => 1 );
 has 'unencrypted_checksum' => ( is => 'rw', isa => 'Str' );
 has 'checksum_method' =>
