@@ -61,6 +61,7 @@ enum 'Bio::SRAXml::AnalysisFileTypeEnum' => [
       bam
       bai
       cram
+      bcf
       vcf
       vcf_aggregate
       tabix
