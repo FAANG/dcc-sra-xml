@@ -108,6 +108,7 @@ use warnings;
 use Exporter 'import';
 use Carp;
 
+use File::Spec;
 use XML::Writer;
 use XML::LibXML;
 use MooseX::Params::Validate;
@@ -147,10 +148,17 @@ our @EXPORT_OK = qw(write_xml_file);
    - the API is designed against this version of the schema
 =cut
 
-our $MAIN_SCHEMA_LOCATION =
-  'http://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/ENA.root.xsd';
-our %SUPPLEMENTARY_SCHEMA_LOCATIONS = ( 'Bio::SRAXml::Dataset::Datasets' =>
-      'http://ftp.sra.ebi.ac.uk/meta/xsd/sra_1_5/EGA.dataset.xsd', );
+our $MAIN_SCHEMA_LOCATION;
+our %SUPPLEMENTARY_SCHEMA_LOCATIONS;
+
+BEGIN {
+    my ( $volume, $directory ) = File::Spec->splitpath( $INC{'Bio/SRAXml.pm'} );
+    my $schema_dir = File::Spec->catdir( $volume, $directory, 'schema' );
+    $MAIN_SCHEMA_LOCATION =
+      File::Spec->catfile( $schema_dir, 'sra_1_5', 'ENA.root.xsd' );
+    $SUPPLEMENTARY_SCHEMA_LOCATIONS{'Bio::SRAXml::Dataset::Datasets'} =
+      File::Spec->catfile( $schema_dir, 'sra_1_5', 'EGA.dataset.xsd' );
+}
 
 =head2 write_xml_file
 
