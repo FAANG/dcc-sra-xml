@@ -180,6 +180,10 @@ $analysis_set->add_analysis(
 );
 ```
 
+##Dependencies
+
+Dependencies are listed in the cpanfile. `cpanm` should be able to install from this. From the checkout directory, run `cpanm --installdeps .`
+
 ##Contributing
 
 We would welcome contributions that extend the SRA objects covered by this library. Please organise code to support one xsd file in one directory, e.g.
