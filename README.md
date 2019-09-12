@@ -198,3 +198,7 @@ The roles in `lib/Bio/SRAXml/Roles` are used for two purposes
 to either tag classes as supporting some functionality, or as mixins to provide   
 
 The library makes heavy use of moose type coercions, so that you users can input data without knowing the entire class hierachy. This should be continued as the llibrary grows. See Bio::SRAXml::Types for examples.
+
+## Funding
+The FAANG Data Coordination Centre has received funding from the [European Union’s Horizon 2020](https://ec.europa.eu/programmes/horizon2020/) research and innovation program under 
+Grant Agreement Nos. 815668, 817923 and 817998, and also form the Biotechnology and [Biological Sciences Research Council](https://bbsrc.ukri.org/) under Grant Agreement No. BB/N019563/1.
